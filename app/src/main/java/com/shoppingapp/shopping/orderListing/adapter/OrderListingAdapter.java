@@ -1,0 +1,74 @@
+package com.shoppingapp.shopping.orderListing.adapter;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.shoppingapp.shopping.orderListing.OrderListingActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import rajatarora.com.shoppingapp.R;
+
+public class OrderListingAdapter extends RecyclerView.Adapter<OrderListingAdapter.CartProductHolder> {
+
+    private ArrayList<String> mOrdersArray = new ArrayList<>();
+
+    @NonNull
+    @Override
+    public CartProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_orders, parent, false);
+        return new CartProductHolder(itemView, parent.getContext());
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull CartProductHolder holder, int position) {
+        holder.bind(mOrdersArray.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return mOrdersArray.size();
+    }
+
+    public void updateOrders(List<String> orders) {
+        this.mOrdersArray.clear();
+        this.mOrdersArray.addAll(orders);
+        notifyDataSetChanged();
+    }
+
+    class CartProductHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.cvClick)
+        CardView cvClick;
+        @BindView(R.id.txtOrderId)
+        TextView txtOrderId;
+
+        Context mContext;
+
+        CartProductHolder(View view, Context context) {
+            super(view);
+            mContext = context;
+            ButterKnife.bind(this, view);
+        }
+
+        void bind(final String orderId) {
+            txtOrderId.setText(orderId);
+            cvClick.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((OrderListingActivity) mContext).viewOrderDetail(orderId);
+                }
+            });
+        }
+    }
+}

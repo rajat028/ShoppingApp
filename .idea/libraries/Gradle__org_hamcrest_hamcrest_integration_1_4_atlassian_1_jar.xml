@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.hamcrest:hamcrest-integration:1.4-atlassian-1@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-integration/1.4-atlassian-1/c2d2cd8b4487891383e0c9dc53c9a721e1b20b3f/hamcrest-integration-1.4-atlassian-1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-integration/1.4-atlassian-1/d0c24bbb156fedcb368d11b7d734c1551a4e9823/hamcrest-integration-1.4-atlassian-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

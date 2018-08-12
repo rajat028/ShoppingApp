@@ -1,0 +1,130 @@
+ext {
+    versions = [
+            kotlin          : '1.2.41',
+            support         : "27.1.1",
+            dagger          : '2.15',
+            rxAndroid       : '2.0.1',
+            retrofit        : '2.3.0',
+            gson            : '2.8.1',
+            okHttp          : "3.8.1",
+            timber          : '4.6.0',
+            mockito         : '2.13.0',
+            junit           : '4.12',
+            espresso        : '3.0.2',
+            testRunner      : '1.0.1',
+            multiDex        : '1.0.2',
+            constraintLayout: '1.1.0',
+            butterKnife     : '8.8.1',
+            scalableSize    : '1.0.5',
+            glide           : '4.7.1',
+            archRoomVersion : '1.0.0',
+            assertj         : '1.2.0',
+            hamcrest        : '1.4-atlassian-1'
+    ]
+
+    supportDeps = [
+            appcompatV7 : "com.android.support:appcompat-v7:$versions.support",
+            design      : "com.android.support:design:$versions.support",
+            recyclerView: "com.android.support:recyclerview-v7:$versions.support",
+            cardview    : "com.android.support:cardview-v7:$versions.support",
+            multiDex    : "com.android.support:multidex:$versions.multiDex"
+    ]
+
+    constraintLayoutDeps = [
+            constraintLayout: "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
+    ]
+
+    dagger = [
+            daggerLibrary         : "com.google.dagger:dagger:$versions.dagger",
+            daggerAndroid         : "com.google.dagger:dagger-android:$versions.dagger",
+            daggerAndroidSupport  : "com.google.dagger:dagger-android-support:$versions.dagger",
+            daggerCompiler        : "com.google.dagger:dagger-compiler:$versions.dagger",
+            daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:$versions.dagger"
+    ]
+
+    roomDeps = [
+            roomLibrary            : "android.arch.persistence.room:runtime:$versions.archRoomVersion",
+            roomRxLibrary          : "android.arch.persistence.room:rxjava2:$versions.archRoomVersion",
+            roomAnnotationProcessor: "android.arch.persistence.room:compiler:$versions.archRoomVersion"
+    ]
+
+    butterKnifeDeps = [
+            butterKnifeLibrary            : "com.jakewharton:butterknife:$versions.butterKnife",
+            butterKnifeAnnotationProcessor: "com.jakewharton:butterknife-compiler:$versions.butterKnife"
+    ]
+
+    glideDeps = [
+            glideLibrary            : "com.github.bumptech.glide:glide:$versions.glide",
+            glideAnnotationProcessor: "com.github.bumptech.glide:glide:$versions.glide"
+    ]
+
+    rxJava = [
+            rxAndroid: "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid",
+    ]
+
+    retrofit = [
+            retrofit     : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+            rxAdapter2   : "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit",
+            gsonConverter: "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+    ]
+
+    scalableDeps = [
+            densityPixels: "com.intuit.sdp:sdp-android:$versions.scalableSize",
+            screenPixels : "com.intuit.ssp:ssp-android:$versions.scalableSize",
+    ]
+
+    okHttp = [
+            logger: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
+            okhttp: "com.squareup.okhttp3:okhttp:$versions.okHttp"
+    ]
+
+    timber = [
+            timber: "com.jakewharton.timber:timber:$versions.timber"
+    ]
+
+    googlePlayServices = [
+            googlePlayServices: "com.google.android.gms:play-services-location:$versions.googlePlayServices"
+    ]
+
+    mockito = [
+            mockito: "org.mockito:mockito-core:$versions.mockito"
+    ]
+
+    junit = [
+            junit: "junit:junit:$versions.junit"
+    ]
+
+    unitTest = [
+            harcrestCore       : "org.hamcrest:hamcrest-core:$versions.hamcrest",
+            harmcrestLib       : "org.hamcrest:hamcrest-library:$versions.hamcrest",
+            hamcrestIntegration: "org.hamcrest:hamcrest-integration:$versions.hamcrest",
+            supportAnnotation  : "com.android.support:support-annotations:$versions.support",
+            assertj            : "com.squareup.assertj:assertj-android:$versions.assertj"
+
+    ] + junit + mockito
+
+
+    supportLibs = supportDeps.values()
+    rxJavaLibs = rxJava.values()
+    networkLibs = retrofit.values() + okHttp.values()
+    timberLibs = timber.values()
+    scalableLibs = scalableDeps.values()
+    constraintLayoutLibs = constraintLayoutDeps.values()
+    butterKnifeLibs = butterKnifeDeps.butterKnifeLibrary
+    glideLibs = glideDeps.glideLibrary
+    unitTestLibs = unitTest.values()
+
+    daggerLibs = [dagger.daggerLibrary,
+                  dagger.daggerAndroid,
+                  dagger.daggerAndroidSupport]
+    roomLibs = [roomDeps.roomLibrary,
+                roomDeps.roomRxLibrary]
+
+    annotationProcessorLibs = [dagger.daggerCompiler,
+                               dagger.daggerAndroidProcessor,
+                               butterKnifeDeps.butterKnifeAnnotationProcessor,
+                               glideDeps.glideAnnotationProcessor,
+                               roomDeps.roomAnnotationProcessor]
+
+}
+
