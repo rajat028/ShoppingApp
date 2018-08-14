@@ -181,6 +181,7 @@ public class CartActivity extends BaseActivity<CartPresenter> implements CartVie
     private void navigateToOrderListing() {
         startActivity(new Intent(this, OrderListingActivity.class));
         finish();
+        navigateToNext();
     }
 
     @Override
@@ -200,6 +201,7 @@ public class CartActivity extends BaseActivity<CartPresenter> implements CartVie
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                navigateToPrevious();
             default:
                 return super.onOptionsItemSelected(item);
         }

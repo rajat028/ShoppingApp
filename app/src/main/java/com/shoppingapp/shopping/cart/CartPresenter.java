@@ -36,10 +36,6 @@ public class CartPresenter extends BasePresenter<CartView> {
             view.hideError();
             view.showLoader();
         }
-        getCartProductsFromDatabase();
-    }
-
-    private void getCartProductsFromDatabase() {
         compositeDisposable.add(shoppingRepository.getCartProducts()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -78,6 +74,7 @@ public class CartPresenter extends BasePresenter<CartView> {
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new CompletableObserver() {
+
                     @Override
                     public void onSubscribe(Disposable disposable) {
                         compositeDisposable.add(disposable);
@@ -85,8 +82,9 @@ public class CartPresenter extends BasePresenter<CartView> {
 
                     @Override
                     public void onComplete() {
-                        if (view != null)
+                        if (view != null) {
                             view.showRemoveSucessMessage();
+                        }
                     }
 
                     @Override
@@ -94,6 +92,7 @@ public class CartPresenter extends BasePresenter<CartView> {
                         if (view != null)
                             view.showRemoveErrorMessage(throwable.getLocalizedMessage());
                     }
+
                 });
     }
 
