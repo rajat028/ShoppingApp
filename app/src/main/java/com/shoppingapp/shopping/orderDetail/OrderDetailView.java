@@ -2,7 +2,6 @@ package com.shoppingapp.shopping.orderDetail;
 
 import com.shoppingapp.common.base.BaseView;
 import com.shoppingapp.data.model.OrderModel;
-import com.shoppingapp.data.model.Products;
 
 import java.util.List;
 

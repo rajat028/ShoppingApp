@@ -14,7 +14,7 @@ public class BasePresenter<T extends BaseView> implements Presenter<T> {
 
     public CompositeDisposable compositeDisposable=new CompositeDisposable();
 
-    boolean isViewAttached;
+    private boolean isViewAttached;
 
     public T getView() {
         if (view != null)

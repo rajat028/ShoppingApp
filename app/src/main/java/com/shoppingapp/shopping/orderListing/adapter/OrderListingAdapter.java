@@ -20,7 +20,7 @@ import rajatarora.com.shoppingapp.R;
 
 public class OrderListingAdapter extends RecyclerView.Adapter<OrderListingAdapter.CartProductHolder> {
 
-    private ArrayList<String> mOrdersArray = new ArrayList<>();
+    private ArrayList<String> ordersArrayList = new ArrayList<>();
 
     @NonNull
     @Override
@@ -32,17 +32,17 @@ public class OrderListingAdapter extends RecyclerView.Adapter<OrderListingAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CartProductHolder holder, int position) {
-        holder.bind(mOrdersArray.get(position));
+        holder.bind(ordersArrayList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mOrdersArray.size();
+        return ordersArrayList.size();
     }
 
     public void updateOrders(List<String> orders) {
-        this.mOrdersArray.clear();
-        this.mOrdersArray.addAll(orders);
+        this.ordersArrayList.clear();
+        this.ordersArrayList.addAll(orders);
         notifyDataSetChanged();
     }
 
@@ -50,23 +50,23 @@ public class OrderListingAdapter extends RecyclerView.Adapter<OrderListingAdapte
 
         @BindView(R.id.cvClick)
         CardView cvClick;
-        @BindView(R.id.txtOrderId)
-        TextView txtOrderId;
+        @BindView(R.id.tvOrderId)
+        TextView tvOrderId;
 
-        Context mContext;
+        Context context;
 
         CartProductHolder(View view, Context context) {
             super(view);
-            mContext = context;
+            this.context = context;
             ButterKnife.bind(this, view);
         }
 
         void bind(final String orderId) {
-            txtOrderId.setText(orderId);
+            tvOrderId.setText(orderId);
             cvClick.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ((OrderListingActivity) mContext).viewOrderDetail(orderId);
+                    ((OrderListingActivity) context).viewOrderDetail(orderId);
                 }
             });
         }

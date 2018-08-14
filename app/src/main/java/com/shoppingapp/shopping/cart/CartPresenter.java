@@ -96,9 +96,9 @@ public class CartPresenter extends BasePresenter<CartView> {
                 });
     }
 
-    public void placeOrder(final ArrayList<Products.ProductsBean> mCartProductsArray) {
+    public void placeOrder(final ArrayList<Products.ProductsBean> productsBeanArrayList) {
         final String orderId = String.valueOf(System.currentTimeMillis());
-        compositeDisposable.add(Observable.fromIterable(mCartProductsArray)
+        compositeDisposable.add(Observable.fromIterable(productsBeanArrayList)
                 .map(new Function<Products.ProductsBean, OrderModel>() {
                     @Override
                     public OrderModel apply(Products.ProductsBean productsBean) {
@@ -125,7 +125,7 @@ public class CartPresenter extends BasePresenter<CartView> {
                     @Override
                     public void onComplete() {
                         if (view != null) {
-                            removeAllProductsFromCartCheckout(mCartProductsArray);
+                            removeAllProductsFromCartCheckout(productsBeanArrayList);
                             view.completeOrder();
                         }
                     }
@@ -162,8 +162,8 @@ public class CartPresenter extends BasePresenter<CartView> {
 
     }
 
-    private void removeAllProductsFromCartCheckout(ArrayList<Products.ProductsBean> mCartProductsArray) {
-        for (Products.ProductsBean productsBean : mCartProductsArray) {
+    private void removeAllProductsFromCartCheckout(ArrayList<Products.ProductsBean> productsBeanArrayList) {
+        for (Products.ProductsBean productsBean : productsBeanArrayList) {
             removeAllProductFromCart(productsBean);
         }
     }

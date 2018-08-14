@@ -1,6 +1,5 @@
 package com.shoppingapp.shopping.products;
 
-import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,7 +29,7 @@ import rajatarora.com.shoppingapp.R;
 public class ProductActivity extends BaseActivity<ProductPresenter> implements ProductView, View.OnClickListener {
 
     @BindView(R.id.toolbar)
-    Toolbar mToolBar;
+    Toolbar toolbar;
 
     @BindView(R.id.llError)
     LinearLayout llError;
@@ -48,7 +47,7 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements P
     ProgressBar pbLoader;
 
     @Inject
-    ProductsAdapter mProductsAdapter;
+    ProductsAdapter productsAdapter;
 
     @Override
     protected int layout() {
@@ -57,11 +56,11 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements P
 
     @Override
     protected void initView() {
-        setSupportActionBar(mToolBar);
+        setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.products);
         }
-        mToolBar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorWhite));
+        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorWhite));
         setupRecyclerView();
         initListeners();
     }
@@ -75,7 +74,7 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements P
         rvProducts.setLayoutManager(gridLayoutManager);
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this, R.dimen._1sdp);
         rvProducts.addItemDecoration(itemDecoration);
-        rvProducts.setAdapter(mProductsAdapter);
+        rvProducts.setAdapter(productsAdapter);
         fetchProducts();
     }
 
@@ -115,7 +114,7 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements P
 
     @Override
     public void showProducts(List<Products.ProductsBean> products) {
-        mProductsAdapter.setProducts(products);
+        productsAdapter.setProducts(products);
         llProducts.setVisibility(View.VISIBLE);
     }
 

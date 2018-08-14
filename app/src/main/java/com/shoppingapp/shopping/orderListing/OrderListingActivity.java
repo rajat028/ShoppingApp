@@ -30,7 +30,7 @@ public class OrderListingActivity extends BaseActivity<OrderListingPresenter>
         implements OrderListingView, View.OnClickListener {
 
     @BindView(R.id.toolbar)
-    Toolbar mToolBar;
+    Toolbar toolbar;
 
     @BindView(R.id.llError)
     LinearLayout llError;
@@ -45,7 +45,7 @@ public class OrderListingActivity extends BaseActivity<OrderListingPresenter>
     ProgressBar pbLoader;
 
     @Inject
-    OrderListingAdapter mOrderListingAdapter;
+    OrderListingAdapter orderListingAdapter;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, OrderListingActivity.class);
@@ -58,12 +58,12 @@ public class OrderListingActivity extends BaseActivity<OrderListingPresenter>
 
     @Override
     protected void initView() {
-        setSupportActionBar(mToolBar);
+        setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.order);
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolBar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorWhite));
+        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorWhite));
         setupRecyclerView();
         initListeners();
     }
@@ -75,7 +75,7 @@ public class OrderListingActivity extends BaseActivity<OrderListingPresenter>
     private void setupRecyclerView() {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvOrders.setLayoutManager(layoutManager);
-        rvOrders.setAdapter(mOrderListingAdapter);
+        rvOrders.setAdapter(orderListingAdapter);
         fetchOrders();
     }
 
@@ -120,7 +120,7 @@ public class OrderListingActivity extends BaseActivity<OrderListingPresenter>
         orderArray.clear();
         orderArray.addAll(hashSet);
         Collections.reverse(orderArray);
-        mOrderListingAdapter.updateOrders(orderArray);
+        orderListingAdapter.updateOrders(orderArray);
         rvOrders.setVisibility(View.VISIBLE);
     }
 

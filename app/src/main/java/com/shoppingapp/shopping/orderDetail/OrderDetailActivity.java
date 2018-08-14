@@ -27,7 +27,7 @@ import rajatarora.com.shoppingapp.R;
 public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> implements OrderDetailView, View.OnClickListener {
 
     @BindView(R.id.toolbar)
-    Toolbar mToolBar;
+    Toolbar toolbar;
 
     @BindView(R.id.llError)
     LinearLayout llError;
@@ -41,10 +41,10 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     @BindView(R.id.pbLoader)
     ProgressBar pbLoader;
 
-    private String mOrderId;
+    private String orderId;
 
     @Inject
-    OrderDetailAdapter mOrderDetailAdapter;
+    OrderDetailAdapter orderDetailAdapter;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, OrderDetailActivity.class);
@@ -57,12 +57,12 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
 
     @Override
     protected void initView() {
-        setSupportActionBar(mToolBar);
+        setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.order_detail);
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolBar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorWhite));
+        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorWhite));
         setupRecyclerView();
         initListeners();
     }
@@ -76,13 +76,13 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         rvProducts.setLayoutManager(gridLayoutManager);
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this, R.dimen._1sdp);
         rvProducts.addItemDecoration(itemDecoration);
-        rvProducts.setAdapter(mOrderDetailAdapter);
+        rvProducts.setAdapter(orderDetailAdapter);
         fetchProducts();
     }
 
     private void fetchProducts() {
-        mOrderId = getIntent().getStringExtra("orderId");
-        presenter.getOrderedProductById(mOrderId);
+        orderId = getIntent().getStringExtra("orderId");
+        presenter.getOrderedProductById(orderId);
     }
 
     @Override
@@ -112,12 +112,12 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
 
     @Override
     public void retry() {
-        presenter.getOrderedProductById(mOrderId);
+        presenter.getOrderedProductById(orderId);
     }
 
     @Override
     public void showProducts(List<OrderModel> productsBeans) {
-        mOrderDetailAdapter.updateProducts(productsBeans);
+        orderDetailAdapter.updateProducts(productsBeans);
         rvProducts.setVisibility(View.VISIBLE);
     }
 

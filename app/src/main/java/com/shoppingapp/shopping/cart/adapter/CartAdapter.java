@@ -22,7 +22,7 @@ import rajatarora.com.shoppingapp.R;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartProductHolder> {
 
-    private ArrayList<Products.ProductsBean> mProductsArray = new ArrayList<>();
+    private ArrayList<Products.ProductsBean> productsBeanArrayList = new ArrayList<>();
 
     @NonNull
     @Override
@@ -35,57 +35,57 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartProductHol
 
     @Override
     public void onBindViewHolder(@NonNull CartProductHolder holder, int position) {
-        holder.bind(mProductsArray.get(position));
+        holder.bind(productsBeanArrayList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mProductsArray.size();
+        return productsBeanArrayList.size();
     }
 
     public void updateProducts(List<Products.ProductsBean> products) {
-        this.mProductsArray.clear();
-        this.mProductsArray.addAll(products);
+        this.productsBeanArrayList.clear();
+        this.productsBeanArrayList.addAll(products);
         notifyDataSetChanged();
     }
 
     class CartProductHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.imgProduct)
-        ImageView imgProduct;
-        @BindView(R.id.txtProductName)
-        TextView txtProductName;
-        @BindView(R.id.txtProductPrice)
-        TextView txtProductPrice;
-        @BindView(R.id.txtProductRating)
-        TextView txtProductRating;
-        @BindView(R.id.imgAddToCart)
-        ImageView imgAddToCart;
+        @BindView(R.id.ivProduct)
+        ImageView ivProduct;
+        @BindView(R.id.tvProductName)
+        TextView tvProductName;
+        @BindView(R.id.tvProductPrice)
+        TextView tvProductPrice;
+        @BindView(R.id.tvProductRating)
+        TextView tvProductRating;
+        @BindView(R.id.ivAddToCart)
+        ImageView ivAddToCart;
 
-        Context mContext;
+        Context context;
 
         CartProductHolder(View view, Context context) {
             super(view);
-            mContext = context;
+            this.context = context;
             ButterKnife.bind(this, view);
         }
 
         void bind(final Products.ProductsBean productsBean) {
-            Glide.with(mContext).load(productsBean.getImage_url()).into(imgProduct);
-            txtProductName.setText(productsBean.getName());
-            txtProductPrice.setText(new StringBuilder().append("Rs ").append(productsBean.getPrice()));
-            txtProductRating.setText(String.valueOf(productsBean.getRating()));
+            Glide.with(context).load(productsBean.getImage_url()).into(ivProduct);
+            tvProductName.setText(productsBean.getName());
+            tvProductPrice.setText(new StringBuilder().append("Rs ").append(productsBean.getPrice()));
+            tvProductRating.setText(String.valueOf(productsBean.getRating()));
 
             if (productsBean.isAddedToCart())
-                imgAddToCart.setImageResource(R.mipmap.ic_action_bookmark);
+                ivAddToCart.setImageResource(R.mipmap.ic_action_bookmark);
             else
-                imgAddToCart.setImageResource(R.mipmap.ic_action_bookmark_border);
+                ivAddToCart.setImageResource(R.mipmap.ic_action_bookmark_border);
 
-            imgAddToCart.setOnClickListener(new View.OnClickListener() {
+            ivAddToCart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     productsBean.setAddedToCart(false);
-                    ((CartActivity) mContext).removeFromCart(productsBean);
+                    ((CartActivity) context).removeFromCart(productsBean);
                 }
             });
 

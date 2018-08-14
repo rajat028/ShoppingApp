@@ -24,7 +24,7 @@
             android:textSize="@dimen/_12ssp" />
 
         <TextView
-            android:id="@+id/txtOrderId"
+            android:id="@+id/tvOrderId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/_8sdp"

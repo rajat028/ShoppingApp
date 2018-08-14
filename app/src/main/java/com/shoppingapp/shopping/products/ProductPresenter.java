@@ -96,8 +96,8 @@ public class ProductPresenter extends BasePresenter<ProductView> {
                 }));
     }
 
-    void insertToLocal(final List<Products.ProductsBean> products) {
-        compositeDisposable.add(Observable.fromIterable(products)
+    void insertToLocal(final List<Products.ProductsBean> productsBeanList) {
+        compositeDisposable.add(Observable.fromIterable(productsBeanList)
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new DisposableObserver<Products.ProductsBean>() {
                     @Override

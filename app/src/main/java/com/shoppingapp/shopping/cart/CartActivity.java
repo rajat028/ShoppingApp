@@ -33,7 +33,7 @@ import rajatarora.com.shoppingapp.R;
 public class CartActivity extends BaseActivity<CartPresenter> implements CartView, View.OnClickListener {
 
     @BindView(R.id.toolbar)
-    Toolbar mToolBar;
+    Toolbar toolbar;
 
     @BindView(R.id.llError)
     LinearLayout llError;
@@ -59,10 +59,10 @@ public class CartActivity extends BaseActivity<CartPresenter> implements CartVie
     @BindView(R.id.btnPlaceOrder)
     Button btnPlaceOrder;
 
-    private ArrayList<Products.ProductsBean> mCartProductsArray = new ArrayList<>();
+    private ArrayList<Products.ProductsBean> productsBeanArrayList = new ArrayList<>();
 
     @Inject
-    CartAdapter mCartAdapter;
+    CartAdapter cartAdapter;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, CartActivity.class);
@@ -75,12 +75,12 @@ public class CartActivity extends BaseActivity<CartPresenter> implements CartVie
 
     @Override
     protected void initView() {
-        setSupportActionBar(mToolBar);
+        setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.cart);
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolBar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorWhite));
+        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorWhite));
         setupRecyclerView();
         initListeners();
     }
@@ -95,7 +95,7 @@ public class CartActivity extends BaseActivity<CartPresenter> implements CartVie
         rvProducts.setLayoutManager(gridLayoutManager);
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this, R.dimen._1sdp);
         rvProducts.addItemDecoration(itemDecoration);
-        rvProducts.setAdapter(mCartAdapter);
+        rvProducts.setAdapter(cartAdapter);
         fetchProducts();
     }
 
@@ -135,9 +135,9 @@ public class CartActivity extends BaseActivity<CartPresenter> implements CartVie
 
     @Override
     public void showProducts(List<Products.ProductsBean> productData) {
-        mCartProductsArray.clear();
-        mCartProductsArray.addAll(productData);
-        mCartAdapter.updateProducts(mCartProductsArray);
+        productsBeanArrayList.clear();
+        productsBeanArrayList.addAll(productData);
+        cartAdapter.updateProducts(productsBeanArrayList);
         showTotalCartPrice(productData);
         rvProducts.setVisibility(View.VISIBLE);
     }
@@ -252,7 +252,7 @@ public class CartActivity extends BaseActivity<CartPresenter> implements CartVie
 
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
-            presenter.placeOrder(mCartProductsArray);
+            presenter.placeOrder(productsBeanArrayList);
         }
     }
 
