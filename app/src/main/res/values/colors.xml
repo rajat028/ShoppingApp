@@ -6,11 +6,10 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorErrorBackground">#E85959</color>
     <color name="colorRetryButton">#4A4A4A</color>
-    <color name="main_background_color">#F5F6F7</color>
     <color name="colorCurrentTemperature">#2A2A2A</color>
     <color name="colorItemText">#2A2A2A</color>
     <color name="ColorCurrentCity">#556799</color>
     <color name="colorBackground">#F0F0F0</color>
     <color name="colorDivider">#989898</color>
-    <color name="colorWhiteRipple">#d7d7d7</color>
+    <color name="colorWhiteRipple">#D7D7D7</color>
 </resources>

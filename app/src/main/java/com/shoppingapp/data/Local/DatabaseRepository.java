@@ -42,8 +42,8 @@ public class DatabaseRepository implements ShoppingRepository {
     }
 
     @Override
-    public void updateProduct(Products.ProductsBean productsBean) {
-        productDAO.updateProduct(productsBean);
+    public void updateProductStatus(Products.ProductsBean productsBean) {
+        productDAO.updateProductStatus(productsBean);
     }
 
     @Override

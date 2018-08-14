@@ -19,7 +19,7 @@ public interface ShoppingRepository  {
 
     void insertProduct(Products.ProductsBean productsBean);
 
-    void updateProduct(Products.ProductsBean productsBean);
+    void updateProductStatus(Products.ProductsBean productsBean);
 
     void updateAllProducts(boolean status, String name);
 

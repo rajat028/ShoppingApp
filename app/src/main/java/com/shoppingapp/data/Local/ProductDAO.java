@@ -31,7 +31,7 @@ public interface ProductDAO {
     void insertProduct(Products.ProductsBean productsBean);
 
     @Update
-    void updateProduct(Products.ProductsBean productsBean);
+    void updateProductStatus(Products.ProductsBean productsBean);
 
     @Query("UPDATE products SET isAddedToCart=:status WHERE name = :name")
     void updateAllProducts(boolean status, String name);

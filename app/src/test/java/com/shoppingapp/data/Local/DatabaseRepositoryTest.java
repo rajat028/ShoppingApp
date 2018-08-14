@@ -22,7 +22,7 @@ public class DatabaseRepositoryTest {
     private DatabaseRepository databaseRepository;
 
     private Products.ProductsBean productsBean = new Products.ProductsBean();
-    private OrderModel orderModel = new OrderModel();
+    private OrderModel orderModel = new OrderModel("1234", productsBean);
 
     @Before
     public void setUp() {
@@ -56,7 +56,7 @@ public class DatabaseRepositoryTest {
 
     @Test
     public void shouldReturnUpdateProductIsCalled() {
-        databaseRepository.updateProduct(productsBean);
+        databaseRepository.updateProductStatus(productsBean);
     }
 
     @Test

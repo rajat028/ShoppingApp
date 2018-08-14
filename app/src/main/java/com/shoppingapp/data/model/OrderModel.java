@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 @Entity(tableName = "order")
 public class OrderModel {
 
-
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private int id;
@@ -27,11 +26,25 @@ public class OrderModel {
 
     }
 
-    public OrderModel(Products.ProductsBean productsBean) {
+    public OrderModel(int id, String orderId, String name, String price, String image_url, double rating) {
+        this.id = id;
+        this.orderId = orderId;
+        this.name = name;
+        this.price = price;
+        this.image_url = image_url;
+        this.rating = rating;
+    }
+
+    public OrderModel(String orderId, Products.ProductsBean productsBean) {
+        this.orderId = orderId;
         name = productsBean.getName();
         price = productsBean.getPrice();
         image_url = productsBean.getImage_url();
         rating = productsBean.getRating();
+    }
+
+    public static OrderModel create(String orderId, Products.ProductsBean productsBean) {
+        return new OrderModel(orderId, productsBean);
     }
 
     public int getId() {

@@ -5,7 +5,6 @@ import com.shoppingapp.data.ShoppingRepository;
 import com.shoppingapp.data.model.OrderModel;
 import com.shoppingapp.data.model.Products;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -69,7 +68,7 @@ public class CartPresenter extends BasePresenter<CartView> {
         Completable.fromAction(new Action() {
             @Override
             public void run() {
-                shoppingRepository.updateProduct(productsBean);
+                shoppingRepository.updateProductStatus(productsBean);
             }
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -96,15 +95,13 @@ public class CartPresenter extends BasePresenter<CartView> {
                 });
     }
 
-    public void placeOrder(final ArrayList<Products.ProductsBean> productsBeanArrayList) {
+    public void placeOrder(final List<Products.ProductsBean> productsBeanList) {
         final String orderId = String.valueOf(System.currentTimeMillis());
-        compositeDisposable.add(Observable.fromIterable(productsBeanArrayList)
+        compositeDisposable.add(Observable.fromIterable(productsBeanList)
                 .map(new Function<Products.ProductsBean, OrderModel>() {
                     @Override
                     public OrderModel apply(Products.ProductsBean productsBean) {
-                        OrderModel order = new OrderModel(productsBean);
-                        order.setOrderId(orderId);
-                        return order;
+                        return OrderModel.create(orderId, productsBean);
                     }
                 }).subscribeOn(Schedulers.io())
                 .subscribeWith(new DisposableObserver<OrderModel>() {
@@ -125,7 +122,7 @@ public class CartPresenter extends BasePresenter<CartView> {
                     @Override
                     public void onComplete() {
                         if (view != null) {
-                            removeAllProductsFromCartCheckout(productsBeanArrayList);
+                            removeAllProductsFromCartOnCheckout(productsBeanList);
                             view.completeOrder();
                         }
                     }
@@ -162,8 +159,8 @@ public class CartPresenter extends BasePresenter<CartView> {
 
     }
 
-    private void removeAllProductsFromCartCheckout(ArrayList<Products.ProductsBean> productsBeanArrayList) {
-        for (Products.ProductsBean productsBean : productsBeanArrayList) {
+    private void removeAllProductsFromCartOnCheckout(List<Products.ProductsBean> productsBeanList) {
+        for (Products.ProductsBean productsBean : productsBeanList) {
             removeAllProductFromCart(productsBean);
         }
     }

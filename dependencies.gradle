@@ -3,6 +3,7 @@ ext {
             kotlin          : '1.2.41',
             support         : "27.1.1",
             dagger          : '2.15',
+            rxJava          : '2.2.0',
             rxAndroid       : '2.0.1',
             retrofit        : '2.3.0',
             gson            : '2.8.1',
@@ -59,18 +60,19 @@ ext {
     ]
 
     rxJava = [
-            rxAndroid: "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid",
+            rxJava   : "io.reactivex.rxjava2:rxjava:$versions.rxJava",
+            rxAndroid: "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
     ]
 
     retrofit = [
             retrofit     : "com.squareup.retrofit2:retrofit:$versions.retrofit",
             rxAdapter2   : "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit",
-            gsonConverter: "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+            gsonConverter: "com.squareup.retrofit2:converter-gson:$versions.retrofit"
     ]
 
     scalableDeps = [
             densityPixels: "com.intuit.sdp:sdp-android:$versions.scalableSize",
-            screenPixels : "com.intuit.ssp:ssp-android:$versions.scalableSize",
+            screenPixels : "com.intuit.ssp:ssp-android:$versions.scalableSize"
     ]
 
     okHttp = [

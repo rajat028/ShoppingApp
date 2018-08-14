@@ -59,7 +59,7 @@ public class CartActivity extends BaseActivity<CartPresenter> implements CartVie
     @BindView(R.id.btnPlaceOrder)
     Button btnPlaceOrder;
 
-    private ArrayList<Products.ProductsBean> productsBeanArrayList = new ArrayList<>();
+    private List<Products.ProductsBean> productsBeanList = new ArrayList<>();
 
     @Inject
     CartAdapter cartAdapter;
@@ -135,9 +135,9 @@ public class CartActivity extends BaseActivity<CartPresenter> implements CartVie
 
     @Override
     public void showProducts(List<Products.ProductsBean> productData) {
-        productsBeanArrayList.clear();
-        productsBeanArrayList.addAll(productData);
-        cartAdapter.updateProducts(productsBeanArrayList);
+        productsBeanList.clear();
+        productsBeanList.addAll(productData);
+        cartAdapter.updateProducts(productsBeanList);
         showTotalCartPrice(productData);
         rvProducts.setVisibility(View.VISIBLE);
     }
@@ -252,7 +252,7 @@ public class CartActivity extends BaseActivity<CartPresenter> implements CartVie
 
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
-            presenter.placeOrder(productsBeanArrayList);
+            presenter.placeOrder(productsBeanList);
         }
     }
 

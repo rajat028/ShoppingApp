@@ -9,6 +9,10 @@ import java.util.List;
 
 public class Products {
 
+    public Products(List<ProductsBean> products) {
+        this.products = products;
+    }
+
     private List<ProductsBean> products;
 
     public List<ProductsBean> getProducts() {
@@ -19,14 +23,32 @@ public class Products {
         this.products = products;
     }
 
+
     @Entity(tableName = "products")
     public static class ProductsBean {
+
         /**
          * name : OnePlus 6
          * price : 40000
          * image_url : https://i.gadgets360cdn.com/products/large/1526490365_635_oneplus_6.jpg
          * rating : 4.5
          */
+
+        public ProductsBean() {
+
+        }
+
+        public ProductsBean(@NonNull String name,
+                            String price,
+                            String image_url,
+                            double rating,
+                            boolean isAddedToCart) {
+            this.name = name;
+            this.price = price;
+            this.image_url = image_url;
+            this.rating = rating;
+            this.isAddedToCart = isAddedToCart;
+        }
 
         @PrimaryKey
         @NonNull
@@ -41,11 +63,12 @@ public class Products {
         @ColumnInfo(name = "isAddedToCart")
         private boolean isAddedToCart;
 
+        @NonNull
         public String getName() {
             return name;
         }
 
-        public void setName(String name) {
+        public void setName(@NonNull String name) {
             this.name = name;
         }
 

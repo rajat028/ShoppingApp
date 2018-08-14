@@ -125,7 +125,7 @@ public class ProductPresenter extends BasePresenter<ProductView> {
         Completable.fromAction(new Action() {
             @Override
             public void run() {
-                shoppingRepository.updateProduct(productsBean);
+                shoppingRepository.updateProductStatus(productsBean);
             }
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

@@ -27,10 +27,6 @@ public class OrderDetailPresenter extends BasePresenter<OrderDetailView> {
             view.hideError();
             view.showLoader();
         }
-        getOrderedProductsFromDatabase(mOrderId);
-    }
-
-    private void getOrderedProductsFromDatabase(String mOrderId) {
         compositeDisposable.add(shoppingRepository.getProductByOrderId(mOrderId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
