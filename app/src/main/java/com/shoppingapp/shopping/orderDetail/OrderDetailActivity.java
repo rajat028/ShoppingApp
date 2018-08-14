@@ -11,12 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Switch;
 
 import com.shoppingapp.common.base.BaseActivity;
 import com.shoppingapp.data.model.OrderModel;
 import com.shoppingapp.exts.ItemOffsetDecoration;
-import com.shoppingapp.shopping.cart.CartActivity;
 import com.shoppingapp.shopping.orderDetail.adapter.OrderDetailAdapter;
 
 import java.util.List;
@@ -128,6 +126,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                navigateToPrevious();
             default:
                 return super.onOptionsItemSelected(item);
         }
