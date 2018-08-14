@@ -39,40 +39,6 @@ public class ProductPresenter extends BasePresenter<ProductView> {
             view.hideError();
             view.showLoader();
         }
-        getAllProductsFromDatabase();
-    }
-
-    private Disposable fetchProductsFromAPI() {
-        return productRepository.getProducts()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<Products>() {
-                    @Override
-                    public void onNext(Products value) {
-                        if (view != null) {
-                            insertToLocal(value.getProducts());
-                            view.hideLoader();
-                            view.showProducts(value.getProducts());
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Timber.e(e);
-                        if (view != null) {
-                            view.hideLoader();
-                            view.showError();
-                        }
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        /// no op
-                    }
-                });
-    }
-
-    private void getAllProductsFromDatabase() {
         compositeDisposable.add(shoppingRepository.getAllProducts()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -81,7 +47,7 @@ public class ProductPresenter extends BasePresenter<ProductView> {
                     public void accept(List<Products.ProductsBean> productsBeans) {
                         if (view != null) {
                             if (productsBeans.isEmpty()) {
-                                compositeDisposable.add(fetchProductsFromAPI());
+                                fetchProductsFromAPI();
                             } else {
                                 view.hideLoader();
                                 view.showProducts(productsBeans);
@@ -100,7 +66,37 @@ public class ProductPresenter extends BasePresenter<ProductView> {
                 }));
     }
 
-    private void insertToLocal(final List<Products.ProductsBean> products) {
+    void fetchProductsFromAPI() {
+        compositeDisposable.add(productRepository.getProducts()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<Products>() {
+                    @Override
+                    public void onNext(Products value) {
+                        if (view != null) {
+                            insertToLocal(value.getProducts());
+                            view.hideLoader();
+                            view.showProducts(value.getProducts());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable throwable) {
+                        Timber.e(throwable);
+                        if (view != null) {
+                            view.hideLoader();
+                            view.showError();
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        /// no op
+                    }
+                }));
+    }
+
+    void insertToLocal(final List<Products.ProductsBean> products) {
         compositeDisposable.add(Observable.fromIterable(products)
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new DisposableObserver<Products.ProductsBean>() {
@@ -110,8 +106,8 @@ public class ProductPresenter extends BasePresenter<ProductView> {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-                        Timber.e(e);
+                    public void onError(Throwable throwable) {
+                        Timber.e(throwable);
                         if (view != null) {
                             view.hideLoader();
                             view.showError();
@@ -125,7 +121,7 @@ public class ProductPresenter extends BasePresenter<ProductView> {
                 }));
     }
 
-    public void addProductToCart(final Products.ProductsBean productsBean) {
+    void addProductToCart(final Products.ProductsBean productsBean) {
         Completable.fromAction(new Action() {
             @Override
             public void run() {

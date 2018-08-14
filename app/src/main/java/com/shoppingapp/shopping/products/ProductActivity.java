@@ -1,5 +1,6 @@
 package com.shoppingapp.shopping.products;
 
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -144,9 +145,11 @@ public class ProductActivity extends BaseActivity<ProductPresenter> implements P
         switch (item.getItemId()) {
             case R.id.order_menu:
                 startActivity(OrderListingActivity.newIntent(ProductActivity.this));
+                navigateToNext();
                 return true;
             case R.id.cart_menu:
                 startActivity(CartActivity.newIntent(ProductActivity.this));
+                navigateToNext();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
