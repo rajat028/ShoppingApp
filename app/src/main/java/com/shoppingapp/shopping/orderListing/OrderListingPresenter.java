@@ -25,6 +25,7 @@ public class OrderListingPresenter extends BasePresenter<OrderListingView> {
     }
 
     void getAllOrders() {
+
         if (view != null) {
             view.hideError();
             view.showLoader();
