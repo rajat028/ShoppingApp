@@ -36,10 +36,6 @@ public class OrderListingPresenter extends BasePresenter<OrderListingView> {
                     @Override
                     public void accept(List<String> orderBeans) {
                         if (view != null) {
-                            HashSet<String> hashSet = new LinkedHashSet<>(orderBeans);
-                            orderBeans.clear();
-                            orderBeans.addAll(hashSet);
-                            Collections.reverse(orderBeans);
                             view.hideLoader();
                             view.showOrders(orderBeans);
                         }

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
+import rajatarora.com.shoppingapp.R;
 
 public abstract class BaseActivity<P extends Presenter<?>> extends AppCompatActivity {
 
@@ -32,6 +33,15 @@ public abstract class BaseActivity<P extends Presenter<?>> extends AppCompatActi
 
     private void detachView() {
         presenter.detachView();
+    }
+
+
+    protected void navigateToNext() {
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
+    protected void navigateToPrevious() {
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 
     @Override

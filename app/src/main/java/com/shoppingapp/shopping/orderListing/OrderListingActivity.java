@@ -6,7 +6,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +17,8 @@ import com.shoppingapp.shopping.orderDetail.OrderDetailActivity;
 import com.shoppingapp.shopping.orderListing.adapter.OrderListingAdapter;
 
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -115,6 +116,10 @@ public class OrderListingActivity extends BaseActivity<OrderListingPresenter>
 
     @Override
     public void showOrders(List<String> orderArray) {
+        HashSet<String> hashSet = new LinkedHashSet<>(orderArray);
+        orderArray.clear();
+        orderArray.addAll(hashSet);
+        Collections.reverse(orderArray);
         mOrderListingAdapter.updateOrders(orderArray);
         rvOrders.setVisibility(View.VISIBLE);
     }
@@ -123,6 +128,7 @@ public class OrderListingActivity extends BaseActivity<OrderListingPresenter>
     public void viewOrderDetail(String orderId) {
         startActivity(OrderDetailActivity.newIntent(OrderListingActivity.this)
                 .putExtra("orderId", orderId));
+        navigateToNext();
     }
 
     @Override
@@ -130,6 +136,7 @@ public class OrderListingActivity extends BaseActivity<OrderListingPresenter>
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+               navigateToPrevious();
             default:
                 return super.onOptionsItemSelected(item);
         }
