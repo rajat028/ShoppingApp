@@ -18,11 +18,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rajatarora.com.shoppingapp.R;
+
+import com.shoppingapp.R;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartProductHolder> {
 
-    private ArrayList<Products.ProductsBean> productsBeanArrayList = new ArrayList<>();
+    private List<Products.ProductsBean> productsBeanList = new ArrayList<>();
 
     @NonNull
     @Override
@@ -35,17 +36,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartProductHol
 
     @Override
     public void onBindViewHolder(@NonNull CartProductHolder holder, int position) {
-        holder.bind(productsBeanArrayList.get(position));
+        holder.bind(productsBeanList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return productsBeanArrayList.size();
+        return productsBeanList.size();
     }
 
     public void updateProducts(List<Products.ProductsBean> products) {
-        this.productsBeanArrayList.clear();
-        this.productsBeanArrayList.addAll(products);
+        this.productsBeanList.clear();
+        this.productsBeanList.addAll(products);
         notifyDataSetChanged();
     }
 
@@ -75,11 +76,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartProductHol
             tvProductName.setText(productsBean.getName());
             tvProductPrice.setText(new StringBuilder().append("Rs ").append(productsBean.getPrice()));
             tvProductRating.setText(String.valueOf(productsBean.getRating()));
-
-            if (productsBean.isAddedToCart())
-                ivAddToCart.setImageResource(R.mipmap.ic_action_bookmark);
-            else
-                ivAddToCart.setImageResource(R.mipmap.ic_action_bookmark_border);
+            ivAddToCart.setImageResource(R.mipmap.ic_action_bookmark);
 
             ivAddToCart.setOnClickListener(new View.OnClickListener() {
                 @Override

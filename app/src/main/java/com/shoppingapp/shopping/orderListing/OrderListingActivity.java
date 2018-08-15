@@ -11,7 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.shoppingapp.R;
 import com.shoppingapp.common.base.BaseActivity;
 import com.shoppingapp.shopping.orderDetail.OrderDetailActivity;
 import com.shoppingapp.shopping.orderListing.adapter.OrderListingAdapter;
@@ -24,7 +26,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import rajatarora.com.shoppingapp.R;
 
 public class OrderListingActivity extends BaseActivity<OrderListingPresenter>
         implements OrderListingView, View.OnClickListener {
@@ -43,6 +44,9 @@ public class OrderListingActivity extends BaseActivity<OrderListingPresenter>
 
     @BindView(R.id.pbLoader)
     ProgressBar pbLoader;
+
+    @BindView(R.id.tvNoOrders)
+    TextView tvNoOrders;
 
     @Inject
     OrderListingAdapter orderListingAdapter;
@@ -115,13 +119,18 @@ public class OrderListingActivity extends BaseActivity<OrderListingPresenter>
 
 
     @Override
-    public void showOrders(List<String> orderArray) {
-        HashSet<String> hashSet = new LinkedHashSet<>(orderArray);
-        orderArray.clear();
-        orderArray.addAll(hashSet);
-        Collections.reverse(orderArray);
-        orderListingAdapter.updateOrders(orderArray);
-        rvOrders.setVisibility(View.VISIBLE);
+    public void showOrders(List<String> ordersArray) {
+        HashSet<String> hashSet = new LinkedHashSet<>(ordersArray);
+        ordersArray.clear();
+        ordersArray.addAll(hashSet);
+        Collections.reverse(ordersArray);
+        orderListingAdapter.updateOrders(ordersArray);
+
+        if (ordersArray.isEmpty()) {
+            tvNoOrders.setVisibility(View.VISIBLE);
+        } else {
+            rvOrders.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -136,7 +145,7 @@ public class OrderListingActivity extends BaseActivity<OrderListingPresenter>
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-               navigateToPrevious();
+                navigateToPrevious();
             default:
                 return super.onOptionsItemSelected(item);
         }

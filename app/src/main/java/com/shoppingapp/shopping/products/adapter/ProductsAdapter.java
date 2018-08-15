@@ -18,11 +18,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rajatarora.com.shoppingapp.R;
+import com.shoppingapp.R;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductHolder> {
 
-    private ArrayList<Products.ProductsBean> productsBeanArrayList = new ArrayList<>();
+    private List<Products.ProductsBean> productsBeanList = new ArrayList<>();
 
     @NonNull
     @Override
@@ -35,17 +35,17 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     @Override
     public void onBindViewHolder(@NonNull ProductHolder holder, int position) {
-        holder.bind(productsBeanArrayList.get(position));
+        holder.bind(productsBeanList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return productsBeanArrayList.size();
+        return productsBeanList.size();
     }
 
     public void setProducts(List<Products.ProductsBean> products) {
-        this.productsBeanArrayList.clear();
-        this.productsBeanArrayList.addAll(products);
+        this.productsBeanList.clear();
+        this.productsBeanList.addAll(products);
         notifyDataSetChanged();
     }
 

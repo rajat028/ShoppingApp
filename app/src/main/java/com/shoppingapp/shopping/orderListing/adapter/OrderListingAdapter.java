@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.shoppingapp.R;
 import com.shoppingapp.shopping.orderListing.OrderListingActivity;
 
 import java.util.ArrayList;
@@ -16,11 +17,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rajatarora.com.shoppingapp.R;
 
 public class OrderListingAdapter extends RecyclerView.Adapter<OrderListingAdapter.CartProductHolder> {
 
-    private ArrayList<String> ordersArrayList = new ArrayList<>();
+    private List<String> ordersList = new ArrayList<>();
 
     @NonNull
     @Override
@@ -32,17 +32,17 @@ public class OrderListingAdapter extends RecyclerView.Adapter<OrderListingAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CartProductHolder holder, int position) {
-        holder.bind(ordersArrayList.get(position));
+        holder.bind(ordersList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return ordersArrayList.size();
+        return ordersList.size();
     }
 
     public void updateOrders(List<String> orders) {
-        this.ordersArrayList.clear();
-        this.ordersArrayList.addAll(orders);
+        this.ordersList.clear();
+        this.ordersList.addAll(orders);
         notifyDataSetChanged();
     }
 

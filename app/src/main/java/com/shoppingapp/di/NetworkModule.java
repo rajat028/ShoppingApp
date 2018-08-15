@@ -11,7 +11,7 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import rajatarora.com.shoppingapp.BuildConfig;
+import com.shoppingapp.BuildConfig;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -20,7 +20,7 @@ import timber.log.Timber;
 @Module
 public class NetworkModule {
 
-    private String getBaseUrl() {
+    public String getBaseUrl() {
         return "https://api.myjson.com/";
     }
 

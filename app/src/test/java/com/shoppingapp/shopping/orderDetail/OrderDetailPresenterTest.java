@@ -26,13 +26,14 @@ public class OrderDetailPresenterTest {
     @Rule
     public RxSchedulersOverrideRule schedulersOverrideRule = new RxSchedulersOverrideRule();
 
-    private static OrderModel ORDER_MODEL = new OrderModel(1,
+    private static OrderModel ORDER_PRODUCTS = new OrderModel(1,
             "1234",
             "One Plus 6T",
             "www.google.com",
             "2000",
             2.00);
-    private static List<OrderModel> ORDER_MODEL_PRODUCT_LIST = Collections.singletonList(ORDER_MODEL);
+    private static List<OrderModel> ORDERED_PRODUCT_LIST = Collections.singletonList(ORDER_PRODUCTS);
+    private static String ORDER_ID = "1234";
 
     @Mock
     private ShoppingRepository shoppingRepository;
@@ -40,8 +41,7 @@ public class OrderDetailPresenterTest {
     @Mock
     private OrderDetailView view;
 
-    private Flowable<List<OrderModel>> orderListFlowable
-            = Flowable.just(ORDER_MODEL_PRODUCT_LIST);
+    private Flowable<List<OrderModel>> orderListFlowable = Flowable.just(ORDERED_PRODUCT_LIST);
     private OrderDetailPresenter orderDetailPresenter;
 
     @Before
@@ -49,30 +49,29 @@ public class OrderDetailPresenterTest {
         orderDetailPresenter = new OrderDetailPresenter(shoppingRepository);
         orderDetailPresenter.attachView(view);
 
-        when(shoppingRepository.getProductByOrderId("1234")).thenReturn(orderListFlowable);
+        when(shoppingRepository.getProductByOrderId(ORDER_ID)).thenReturn(orderListFlowable);
     }
 
     @Test
-    public void shouldReturnProductsAsPerOrderIdIsSuccessful() {
-        orderDetailPresenter.getOrderedProductById("1234");
+    public void shouldReturnProductsAsPerOrderIdWhenSuccessful() {
+        orderDetailPresenter.getOrderedProductById(ORDER_ID);
 
         verify(view).hideError();
         verify(view).showLoader();
         verify(view).hideLoader();
-        verify(view).showProducts(ORDER_MODEL_PRODUCT_LIST);
+        verify(view).showProducts(ORDERED_PRODUCT_LIST);
     }
 
     @Test
-    public void shouldReturnProductsAsPerOrderIdIsFailed() {
-        when(shoppingRepository.getProductByOrderId("1234"))
+    public void shouldReturnProductsAsPerOrderIdWhenFailed() {
+        when(shoppingRepository.getProductByOrderId(ORDER_ID))
                 .thenReturn(Flowable.<List<OrderModel>>error(new IOException()));
 
-        orderDetailPresenter.getOrderedProductById("1234");
+        orderDetailPresenter.getOrderedProductById(ORDER_ID);
 
         verify(view).hideError();
         verify(view).showLoader();
         verify(view).hideLoader();
         verify(view).showError();
     }
-
 }

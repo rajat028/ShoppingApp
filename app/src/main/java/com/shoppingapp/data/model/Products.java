@@ -23,7 +23,6 @@ public class Products {
         this.products = products;
     }
 
-
     @Entity(tableName = "products")
     public static class ProductsBean {
 

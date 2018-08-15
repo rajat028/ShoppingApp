@@ -20,7 +20,8 @@ ext {
             glide           : '4.7.1',
             archRoomVersion : '1.0.0',
             assertj         : '1.2.0',
-            hamcrest        : '1.4-atlassian-1'
+            hamcrest        : '1.4-atlassian-1',
+            restMock        : '0.3.1',
     ]
 
     supportDeps = [
@@ -105,6 +106,16 @@ ext {
 
     ] + junit + mockito
 
+    restMock = [
+            restMock: "com.github.andrzejchm.RESTMock:android:$versions.restMock"
+    ]
+
+    androidTests = [
+            mockitoAndroid: "org.mockito:mockito-android:$versions.mockito",
+            espressoCore  : "com.android.support.test.espresso:espresso-core:$versions.espresso",
+            testRunner    : "com.android.support.test:runner:$versions.testRunner",
+            testRules     : "com.android.support.test:rules:$versions.testRunner"
+    ] + mockito
 
     supportLibs = supportDeps.values()
     rxJavaLibs = rxJava.values()
@@ -115,6 +126,8 @@ ext {
     butterKnifeLibs = butterKnifeDeps.butterKnifeLibrary
     glideLibs = glideDeps.glideLibrary
     unitTestLibs = unitTest.values()
+    restMockLibs = restMock.values()
+    androidTestsLibs = androidTests.values() + supportLibs
 
     daggerLibs = [dagger.daggerLibrary,
                   dagger.daggerAndroid,

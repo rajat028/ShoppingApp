@@ -3,7 +3,6 @@ package com.shoppingapp.shopping.products;
 import com.shoppingapp.common.base.BaseView;
 import com.shoppingapp.data.model.Products;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface ProductView extends BaseView {

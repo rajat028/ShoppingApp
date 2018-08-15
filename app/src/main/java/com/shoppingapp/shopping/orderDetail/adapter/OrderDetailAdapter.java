@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.shoppingapp.R;
 import com.shoppingapp.data.model.OrderModel;
 
 import java.util.ArrayList;
@@ -17,11 +18,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rajatarora.com.shoppingapp.R;
 
 public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.CartProductHolder> {
 
-    private ArrayList<OrderModel> orderedProductsArrayList = new ArrayList<>();
+    private List<OrderModel> orderedProductsList = new ArrayList<>();
 
     @NonNull
     @Override
@@ -34,17 +34,17 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull CartProductHolder holder, int position) {
-        holder.bind(orderedProductsArrayList.get(position));
+        holder.bind(orderedProductsList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return orderedProductsArrayList.size();
+        return orderedProductsList.size();
     }
 
     public void updateProducts(List<OrderModel> products) {
-        this.orderedProductsArrayList.clear();
-        this.orderedProductsArrayList.addAll(products);
+        this.orderedProductsList.clear();
+        this.orderedProductsList.addAll(products);
         notifyDataSetChanged();
     }
 

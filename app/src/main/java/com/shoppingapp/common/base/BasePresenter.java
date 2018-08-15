@@ -1,9 +1,12 @@
 package com.shoppingapp.common.base;
 
-import android.util.Log;
-
 import io.reactivex.disposables.CompositeDisposable;
 
+/**
+ * Base class that implements the Presenter interface and provides a base implementation for
+ * attachView() and detachView(). It also handles keeping a reference to the view that
+ * can be accessed from the children classes by calling getView().
+ */
 public class BasePresenter<T extends BaseView> implements Presenter<T> {
 
     public T view = null;
@@ -12,22 +15,10 @@ public class BasePresenter<T extends BaseView> implements Presenter<T> {
         this.view = view;
     }
 
-    public CompositeDisposable compositeDisposable=new CompositeDisposable();
-
-    private boolean isViewAttached;
+    public CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public T getView() {
-        if (view != null)
-            isViewAttached = true;
         return view;
-    }
-
-
-    void checkViewAttached() {
-        if (!isViewAttached) {
-            Log.e("Error = ","Please call Presenter.attachView(BaseView) before " +
-                    "requesting data to the Presenter");
-        }
     }
 
     @Override

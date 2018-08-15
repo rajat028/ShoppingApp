@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="rajatarora.com.shoppingapp">
+    package="com.shoppingapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -34,6 +34,7 @@
         <activity
             android:name="com.shoppingapp.shopping.orderDetail.OrderDetailActivity"
             android:screenOrientation="portrait" />
+
 
     </application>
 

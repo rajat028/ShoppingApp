@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
-import rajatarora.com.shoppingapp.R;
+import com.shoppingapp.R;
 
 public abstract class BaseActivity<P extends Presenter<?>> extends AppCompatActivity {
 

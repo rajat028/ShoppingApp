@@ -38,7 +38,7 @@ public class ShoppingApplication extends Application implements HasActivityInjec
         return activityInjector;
     }
 
-    private AppComponent getComponent() {
+    public AppComponent getComponent() {
         return DaggerAppComponent.builder()
                 .appModule(new AppModule(getApplicationContext()))
                 .build();

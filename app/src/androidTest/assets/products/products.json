@@ -1,0 +1,102 @@
+{
+  "products": [
+    {
+      "name": "OnePlus 6",
+      "price": "40000",
+      "image_url": "https://i.gadgets360cdn.com/products/large/1526490365_635_oneplus_6.jpg",
+      "rating": 4.5,
+      "isAddedToCart": false
+    },
+    {
+      "name": "iPhone X",
+      "price": "90000",
+      "image_url": "https://cdn2.gsmarena.com/vv/bigpic/apple-iphone-x.jpg",
+      "rating": 4,
+      "isAddedToCart": false
+    },
+    {
+      "name": "Furn Central PP Collapsible Wardrobe  (Finish Color - Pink Dot)",
+      "price": "2399",
+      "image_url": "https://rukminim1.flixcart.com/image/612/612/jeokbrk0/collapsible-wardrobe/8/g/b/pp-1331-furn-central-pink-dot-original-imaf3bnfqjmzhycn.jpeg",
+      "rating": 3.5,
+      "isAddedToCart": false
+    },
+    {
+      "name": "Canon Eos 1300D 18MP Digital SLR",
+      "price": "30990",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/81V7JDgjp3L._SX425_.jpg",
+      "rating": 4.2,
+      "isAddedToCart": false
+    },
+    {
+      "name": "Lenovo 80XG008MIN",
+      "price": "26490",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/412zvJs5dEL._SX425_.jpg",
+      "rating": 2.9,
+      "isAddedToCart": false
+    },
+    {
+      "name": "JBL Go Portable Wireless Bluetooth Speaker with Mic (Orange)",
+      "price": "1599",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/81p1CGgFCAL._SX425_.jpg",
+      "rating": 3.8,
+      "isAddedToCart": false
+    },
+    {
+      "name": "NanoNine SS086",
+      "price": "399",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/81nXFssn8qL._SX425_.jpg",
+      "rating": 3,
+      "isAddedToCart": false
+    },
+    {
+      "name": "Philips Beard Trimmer",
+      "price": "1149",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/61gIL215KZL._SY741_.jpg",
+      "rating": 3.6,
+      "isAddedToCart": false
+    },
+    {
+      "name": "Mi 10000mAH Li-Polymer Power Bank 2i (Black)",
+      "price": "2099",
+      "image_url": "https://i.ebayimg.com/images/g/HuEAAOSwSuNadb~~/s-l300.jpg",
+      "rating": 4.1,
+      "isAddedToCart": false
+    },
+    {
+      "name": "Boat Rockerz 400 On-Ear Bluetooth Headphones (Carbon Black)",
+      "price": "1409",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/41GTocYVG%2BL._SX425_.jpg",
+      "rating": 4.1,
+      "isAddedToCart": false
+    },
+    {
+      "name": "JBL E25BT",
+      "price": "2699",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/31lmvAN0e3L._SY445_.jpg",
+      "rating": 4.2,
+      "isAddedToCart": false
+    },
+    {
+      "name": "AO Smith X8 9-Litre Green RO Series Water Purifier",
+      "price": "17049",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/81yjzwNQOtL._SY679_.jpg",
+      "rating": 4.1,
+      "isAddedToCart": false
+    },
+    {
+      "name": "AmazonBasics Premium Stainless Steel Knife Set with Block, 9-Pieces, Black",
+      "price": "1099",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/81kXNSScGQL._SY679_.jpg",
+      "rating": 1.9,
+      "isAddedToCart": false
+    },
+    {
+      "name": "Milton Thermosteel Flask",
+      "price": "799",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/61omB1g6VRL._SY741_.jpg",
+      "rating": 2.8,
+      "isAddedToCart": false
+    }
+  ]
+}

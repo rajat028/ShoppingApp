@@ -1,30 +1,54 @@
 package com.shoppingapp.data.remote;
 
+import com.shoppingapp.data.model.Products;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.MockitoRule;
 
+import java.util.Collections;
+
+import io.reactivex.Observable;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+@RunWith(MockitoJUnitRunner.class)
 public class ProductApiRepositoryTest {
 
-    @Rule
-    public MockitoRule mockitoRule = MockitoJUnit.rule();
-
     @Mock
-    private
-    ShoppingApi shoppingApi;
+    private ShoppingApi shoppingApi;
 
     private ProductApiRepository productApiRepository;
+
+    private Products.ProductsBean productsBean = new Products.ProductsBean("One Plus 6T",
+            "www.google.com",
+            "2000",
+            2.00,
+            false);
+    private Products products = new Products(Collections.singletonList(productsBean));
+    private Observable<Products> productsObservable = Observable.just(products);
+
 
     @Before
     public void setUp() {
         productApiRepository = new ProductApiRepository(shoppingApi);
+
+        when(shoppingApi.getProducts()).thenReturn(productsObservable);
     }
 
     @Test
     public void shouldReturnGetProductsIsCalled() {
-        productApiRepository.getProducts();
+        Observable<Products> observable = productApiRepository.getProducts();
+
+        verify(shoppingApi).getProducts();
+        assertEquals(observable, productsObservable);
     }
 }

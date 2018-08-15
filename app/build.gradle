@@ -10,7 +10,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.shoppingapp.runner.DemoTestRunner"
     }
     buildTypes {
         release {
@@ -22,6 +22,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
     implementation supportLibs
     implementation constraintLayoutLibs
     implementation scalableLibs
@@ -29,11 +30,20 @@ dependencies {
     implementation butterKnifeLibs
     implementation glideLibs
     implementation roomLibs
+    implementation timberLibs
     api rxJavaLibs
     api networkLibs
-    implementation timberLibs
+
     testImplementation unitTestLibs
 
+    androidTestImplementation restMockLibs
+    androidTestImplementation androidTestsLibs
+
     kapt annotationProcessorLibs
+
+    kaptTest dagger.daggerCompiler
+    kaptTest dagger.daggerAndroidProcessor
+    kaptAndroidTest dagger.daggerCompiler
+    kaptAndroidTest dagger.daggerAndroidProcessor
 
 }

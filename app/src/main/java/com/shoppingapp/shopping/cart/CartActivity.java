@@ -28,7 +28,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import rajatarora.com.shoppingapp.R;
+import com.shoppingapp.R;
 
 public class CartActivity extends BaseActivity<CartPresenter> implements CartView, View.OnClickListener {
 

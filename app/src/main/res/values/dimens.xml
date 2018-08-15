@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="dimen_16">16dp</dimen>
-    <dimen name="font_16">16sp</dimen>
-    <dimen name="error_text_size">54sp</dimen>
-    <dimen name="retry_button_margin_top">44dp</dimen>
-    <dimen name="retry_button_text_size">18sp</dimen>
-    <dimen name="retry_button_padding_horizontal">32dp</dimen>
+
     <dimen name="progress_bar_padding">16dp</dimen>
-    <dimen name="current_temperature_margin_top">56dp</dimen>
-    <dimen name="current_city_margin_top">16dp</dimen>
-    <dimen name="weather_forecast_margin_top">88dp</dimen>
-    <dimen name="current_temperature_text_size">96sp</dimen>
-    <dimen name="current_city_text_size">36sp</dimen>
-    <dimen name="error_message_padding_horizontal">48dp</dimen>
-    <dimen name="rv_item_margin_bottom">32dp</dimen>
-    <dimen name="rv_item_margin_top">24dp</dimen>
+
 </resources>
