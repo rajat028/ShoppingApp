@@ -1,7 +1,7 @@
 package com.shoppingapp.shopping.cart;
 
 import com.shoppingapp.common.base.BasePresenter;
-import com.shoppingapp.data.ShoppingRepository;
+import com.shoppingapp.data.LocalRepository;
 import com.shoppingapp.data.model.OrderModel;
 import com.shoppingapp.data.model.Products;
 
@@ -23,11 +23,11 @@ import timber.log.Timber;
 
 public class CartPresenter extends BasePresenter<CartView> {
 
-    private ShoppingRepository shoppingRepository;
+    private LocalRepository localRepository;
 
     @Inject
-    public CartPresenter(ShoppingRepository shoppingRepository) {
-        this.shoppingRepository = shoppingRepository;
+    public CartPresenter(LocalRepository localRepository) {
+        this.localRepository = localRepository;
     }
 
     void getCartProducts() {
@@ -35,7 +35,7 @@ public class CartPresenter extends BasePresenter<CartView> {
             view.hideError();
             view.showLoader();
         }
-        compositeDisposable.add(shoppingRepository.getCartProducts()
+        compositeDisposable.add(localRepository.getCartProducts()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Consumer<List<Products.ProductsBean>>() {
@@ -68,7 +68,7 @@ public class CartPresenter extends BasePresenter<CartView> {
         Completable.fromAction(new Action() {
             @Override
             public void run() {
-                shoppingRepository.updateProductStatus(productsBean);
+                localRepository.updateProductStatus(productsBean);
             }
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -107,7 +107,7 @@ public class CartPresenter extends BasePresenter<CartView> {
                 .subscribeWith(new DisposableObserver<OrderModel>() {
                     @Override
                     public void onNext(OrderModel orderBean) {
-                        shoppingRepository.insertOrder(orderBean);
+                        localRepository.insertOrder(orderBean);
                     }
 
                     @Override
@@ -133,7 +133,7 @@ public class CartPresenter extends BasePresenter<CartView> {
         Completable.fromAction(new Action() {
             @Override
             public void run() {
-                shoppingRepository.updateAllProducts(false, productsBean.getName());
+                localRepository.updateAllProducts(false, productsBean.getName());
             }
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

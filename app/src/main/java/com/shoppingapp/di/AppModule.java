@@ -3,7 +3,7 @@ package com.shoppingapp.di;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
-import com.shoppingapp.data.ShoppingRepository;
+import com.shoppingapp.data.LocalRepository;
 import com.shoppingapp.data.Local.DatabaseRepository;
 import com.shoppingapp.data.Local.ProductDAO;
 import com.shoppingapp.data.Local.ShoppingDatabase;
@@ -38,7 +38,7 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public ShoppingRepository getShoppingRepository(ProductDAO productDAO) {
+    public LocalRepository getShoppingRepository(ProductDAO productDAO) {
         return new DatabaseRepository(productDAO);
     }
 

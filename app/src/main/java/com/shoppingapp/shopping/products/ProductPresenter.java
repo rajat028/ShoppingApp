@@ -1,8 +1,8 @@
 package com.shoppingapp.shopping.products;
 
 import com.shoppingapp.common.base.BasePresenter;
-import com.shoppingapp.data.ProductRepository;
-import com.shoppingapp.data.ShoppingRepository;
+import com.shoppingapp.data.LocalRepository;
+import com.shoppingapp.data.RemoteRepository;
 import com.shoppingapp.data.model.Products;
 
 import java.util.List;
@@ -23,15 +23,15 @@ import timber.log.Timber;
 public class ProductPresenter extends BasePresenter<ProductView> {
 
     // Repository to handle api operations.
-    private ProductRepository productRepository;
+    private RemoteRepository productRepository;
 
     // Repository to handle database operations.
-    private ShoppingRepository shoppingRepository;
+    private LocalRepository localRepository;
 
     @Inject
-    public ProductPresenter(ProductRepository productRepository, ShoppingRepository shoppingRepository) {
+    public ProductPresenter(RemoteRepository productRepository, LocalRepository localRepository) {
         this.productRepository = productRepository;
-        this.shoppingRepository = shoppingRepository;
+        this.localRepository = localRepository;
     }
 
     void getProducts() {
@@ -39,7 +39,7 @@ public class ProductPresenter extends BasePresenter<ProductView> {
             view.hideError();
             view.showLoader();
         }
-        compositeDisposable.add(shoppingRepository.getAllProducts()
+        compositeDisposable.add(localRepository.getAllProducts()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Consumer<List<Products.ProductsBean>>() {
@@ -102,7 +102,7 @@ public class ProductPresenter extends BasePresenter<ProductView> {
                 .subscribeWith(new DisposableObserver<Products.ProductsBean>() {
                     @Override
                     public void onNext(Products.ProductsBean productsBean) {
-                        shoppingRepository.insertProduct(productsBean);
+                        localRepository.insertProduct(productsBean);
                     }
 
                     @Override
@@ -125,7 +125,7 @@ public class ProductPresenter extends BasePresenter<ProductView> {
         Completable.fromAction(new Action() {
             @Override
             public void run() {
-                shoppingRepository.updateProductStatus(productsBean);
+                localRepository.updateProductStatus(productsBean);
             }
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

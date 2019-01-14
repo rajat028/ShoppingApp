@@ -1,6 +1,6 @@
 package com.shoppingapp.data.Local;
 
-import com.shoppingapp.data.ShoppingRepository;
+import com.shoppingapp.data.LocalRepository;
 import com.shoppingapp.data.model.OrderModel;
 import com.shoppingapp.data.model.Products;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 
-public class DatabaseRepository implements ShoppingRepository {
+public class DatabaseRepository implements LocalRepository {
 
     private ProductDAO productDAO;
 

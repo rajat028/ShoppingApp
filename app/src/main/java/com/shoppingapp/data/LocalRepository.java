@@ -7,7 +7,7 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 
-public interface ShoppingRepository  {
+public interface LocalRepository {
 
     Flowable<List<Products.ProductsBean>> getAllProducts();
 

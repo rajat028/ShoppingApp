@@ -1,7 +1,7 @@
 package com.shoppingapp.shopping.products;
 
-import com.shoppingapp.data.ProductRepository;
-import com.shoppingapp.data.ShoppingRepository;
+import com.shoppingapp.data.RemoteRepository;
+import com.shoppingapp.data.LocalRepository;
 import com.shoppingapp.data.model.Products;
 
 import org.junit.After;
@@ -38,9 +38,9 @@ public class ProductPresenterTest {
     private static Products PRODUCTS = new Products(PRODUCTS_BEAN_LIST);
 
     @Mock
-    private ProductRepository productRepository;
+    private RemoteRepository productRepository;
     @Mock
-    private ShoppingRepository shoppingRepository;
+    private LocalRepository localRepository;
     @Mock
     private ProductView view;
 
@@ -51,9 +51,9 @@ public class ProductPresenterTest {
 
     @Before
     public void setUp() {
-        productPresenter = new ProductPresenter(productRepository, shoppingRepository);
+        productPresenter = new ProductPresenter(productRepository, localRepository);
         productPresenter.attachView(view);
-        when(shoppingRepository.getAllProducts()).thenReturn(productListFlowable);
+        when(localRepository.getAllProducts()).thenReturn(productListFlowable);
         when(productRepository.getProducts()).thenReturn(productsObservable);
     }
 
@@ -69,7 +69,7 @@ public class ProductPresenterTest {
 
     @Test
     public void shouldShowErrorWhenDatabaseFetchingIsFailed() {
-        when(shoppingRepository.getAllProducts())
+        when(localRepository.getAllProducts())
                 .thenReturn(Flowable.<List<Products.ProductsBean>>error(new IOException()));
 
         productPresenter.getProducts();
@@ -103,14 +103,14 @@ public class ProductPresenterTest {
     public void shouldInsertProductInDatabase() {
         productPresenter.insertToLocal(PRODUCTS.getProducts());
 
-        verify(shoppingRepository).insertProduct(PRODUCTS_BEAN);
+        verify(localRepository).insertProduct(PRODUCTS_BEAN);
     }
 
     @Test
     public void shouldAddProductToCart() {
         productPresenter.addProductToCart(PRODUCTS_BEAN);
 
-        verify(shoppingRepository).updateProductStatus(PRODUCTS_BEAN);
+        verify(localRepository).updateProductStatus(PRODUCTS_BEAN);
         verify(view).showAddToCartSucess();
     }
 

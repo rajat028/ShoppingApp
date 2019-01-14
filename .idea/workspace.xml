@@ -11,7 +11,24 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c3c32df-2a7e-4bf5-a0e2-8eb38fcec09c" name="Default" comment="" />
+    <list default="true" id="7c3c32df-2a7e-4bf5-a0e2-8eb38fcec09c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/RemoteRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/remote/ProductApiRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/remote/ProductApiRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/remote/RemoteApiRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/remote/RemoteApiRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/ProductPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/ProductPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/di/ProductActivityModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/di/ProductActivityModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/shoppingapp/data/remote/ProductApiRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/shoppingapp/data/remote/ProductApiRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/shoppingapp/shopping/products/ProductPresenterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/shoppingapp/shopping/products/ProductPresenterTest.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +49,35 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="ProductPresenter.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/ProductPresenter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RemoteApiRepository.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/remote/RemoteApiRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductApiRepository.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/remote/ProductApiRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -2218,16 +2263,18 @@
       <list>
         <option value="$PROJECT_DIR$/local.properties" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/ProductActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/ProductPresenter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/LocalRepository.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/Local/DatabaseRepository.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/Local/ProductDAO.java" />
         <option value="$PROJECT_DIR$/app/src/test/java/com/shoppingapp/data/Local/DatabaseRepositoryTest.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/common/base/BaseActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/ProductPresenter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/remote/ProductApiRepository.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/remote/RemoteApiRepository.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="797" />
@@ -2341,7 +2388,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="PP&#9;FILE&#9;file:///Users/rarora/Documents/Projects/ShoppingApp/app/src/main/java/com/shoppingapp/shopping/products/ProductPresenter.java&#10;local.p&#9;FILE&#9;file:///Users/rarora/Documents/Projects/ShoppingApp/local.properties" />
+    <property name="SearchEverywhereHistoryKey" value="Remote&#9;PSI&#9;JAVA://com.shoppingapp.data.remote.RemoteApiRepository&#10;PP&#9;FILE&#9;file:///Users/rarora/Documents/Projects/ShoppingApp/app/src/main/java/com/shoppingapp/shopping/products/ProductPresenter.java&#10;local.p&#9;FILE&#9;file:///Users/rarora/Documents/Projects/ShoppingApp/local.properties" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="device.picker.selection" value="Nexus_5X_API_28" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -2395,7 +2442,7 @@
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="true" />
       <option name="PREFERRED_AVD" value="" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
@@ -2474,7 +2521,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="797" extended-state="1" />
+    <frame x="0" y="23" width="1440" height="797" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Android Profiler" />
@@ -2490,7 +2538,7 @@
       <window_info id="Captures" order="2" weight="0.25" />
       <window_info id="Capture Tool" />
       <window_info id="Designer" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24964234" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24964234" />
       <window_info anchor="bottom" id="Build" weight="0.3293944" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3293944" />
       <window_info anchor="right" id="Gradle" />
@@ -2597,17 +2645,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/ProductPresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="31" column="40" lean-forward="true" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/ProductRepository.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/RemoteRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/remote/ProductApiRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/remote/RemoteApiRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/ProductPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
         </state>
       </provider>
     </entry>

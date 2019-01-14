@@ -1,11 +1,8 @@
 package com.shoppingapp.shopping.orderListing;
 
 import com.shoppingapp.common.base.BasePresenter;
-import com.shoppingapp.data.ShoppingRepository;
+import com.shoppingapp.data.LocalRepository;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,11 +14,11 @@ import timber.log.Timber;
 
 public class OrderListingPresenter extends BasePresenter<OrderListingView> {
 
-    private ShoppingRepository shoppingRepository;
+    private LocalRepository localRepository;
 
     @Inject
-    public OrderListingPresenter(ShoppingRepository shoppingRepository) {
-        this.shoppingRepository = shoppingRepository;
+    public OrderListingPresenter(LocalRepository localRepository) {
+        this.localRepository = localRepository;
     }
 
     void getAllOrders() {
@@ -30,7 +27,7 @@ public class OrderListingPresenter extends BasePresenter<OrderListingView> {
             view.hideError();
             view.showLoader();
         }
-        compositeDisposable.add(shoppingRepository.getAllOrder()
+        compositeDisposable.add(localRepository.getAllOrder()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Consumer<List<String>>() {

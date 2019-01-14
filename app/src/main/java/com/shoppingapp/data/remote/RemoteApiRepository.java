@@ -1,5 +1,6 @@
 package com.shoppingapp.data.remote;
 
+import com.shoppingapp.data.RemoteRepository;
 import com.shoppingapp.data.model.Products;
 
 import io.reactivex.Observable;

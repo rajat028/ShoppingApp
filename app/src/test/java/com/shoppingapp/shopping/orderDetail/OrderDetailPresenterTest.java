@@ -1,6 +1,6 @@
 package com.shoppingapp.shopping.orderDetail;
 
-import com.shoppingapp.data.ShoppingRepository;
+import com.shoppingapp.data.LocalRepository;
 import com.shoppingapp.data.model.OrderModel;
 
 import org.junit.Before;
@@ -36,7 +36,7 @@ public class OrderDetailPresenterTest {
     private static String ORDER_ID = "1234";
 
     @Mock
-    private ShoppingRepository shoppingRepository;
+    private LocalRepository localRepository;
 
     @Mock
     private OrderDetailView view;
@@ -46,10 +46,10 @@ public class OrderDetailPresenterTest {
 
     @Before
     public void setup() {
-        orderDetailPresenter = new OrderDetailPresenter(shoppingRepository);
+        orderDetailPresenter = new OrderDetailPresenter(localRepository);
         orderDetailPresenter.attachView(view);
 
-        when(shoppingRepository.getProductByOrderId(ORDER_ID)).thenReturn(orderListFlowable);
+        when(localRepository.getProductByOrderId(ORDER_ID)).thenReturn(orderListFlowable);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class OrderDetailPresenterTest {
 
     @Test
     public void shouldReturnProductsAsPerOrderIdWhenFailed() {
-        when(shoppingRepository.getProductByOrderId(ORDER_ID))
+        when(localRepository.getProductByOrderId(ORDER_ID))
                 .thenReturn(Flowable.<List<OrderModel>>error(new IOException()));
 
         orderDetailPresenter.getOrderedProductById(ORDER_ID);

@@ -1,7 +1,7 @@
 package com.shoppingapp.shopping.orderDetail;
 
 import com.shoppingapp.common.base.BasePresenter;
-import com.shoppingapp.data.ShoppingRepository;
+import com.shoppingapp.data.LocalRepository;
 import com.shoppingapp.data.model.OrderModel;
 
 import java.util.List;
@@ -15,11 +15,11 @@ import timber.log.Timber;
 
 public class OrderDetailPresenter extends BasePresenter<OrderDetailView> {
 
-    private ShoppingRepository shoppingRepository;
+    private LocalRepository localRepository;
 
     @Inject
-    public OrderDetailPresenter(ShoppingRepository shoppingRepository) {
-        this.shoppingRepository = shoppingRepository;
+    public OrderDetailPresenter(LocalRepository localRepository) {
+        this.localRepository = localRepository;
     }
 
     public void getOrderedProductById(String mOrderId) {
@@ -27,7 +27,7 @@ public class OrderDetailPresenter extends BasePresenter<OrderDetailView> {
             view.hideError();
             view.showLoader();
         }
-        compositeDisposable.add(shoppingRepository.getProductByOrderId(mOrderId)
+        compositeDisposable.add(localRepository.getProductByOrderId(mOrderId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Consumer<List<OrderModel>>() {

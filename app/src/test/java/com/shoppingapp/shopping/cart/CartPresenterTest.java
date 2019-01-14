@@ -1,6 +1,6 @@
 package com.shoppingapp.shopping.cart;
 
-import com.shoppingapp.data.ShoppingRepository;
+import com.shoppingapp.data.LocalRepository;
 import com.shoppingapp.data.model.Products;
 
 import org.junit.After;
@@ -35,7 +35,7 @@ public class CartPresenterTest {
     private static List<Products.ProductsBean> CART_PRODUCTS_BEAN_LIST = Collections.singletonList(CART_PRODUCTS_BEAN);
 
     @Mock
-    private ShoppingRepository shoppingRepository;
+    private LocalRepository localRepository;
     @Mock
     private CartView view;
 
@@ -45,9 +45,9 @@ public class CartPresenterTest {
 
     @Before
     public void setUp() {
-        cartPresenter = new CartPresenter(shoppingRepository);
+        cartPresenter = new CartPresenter(localRepository);
         cartPresenter.attachView(view);
-        when(shoppingRepository.getCartProducts()).thenReturn(cartProductsListFlowable);
+        when(localRepository.getCartProducts()).thenReturn(cartProductsListFlowable);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class CartPresenterTest {
 
     @Test
     public void shouldReturnErrorWhenDatabaseFetchingIsFailed() {
-        when(shoppingRepository.getCartProducts())
+        when(localRepository.getCartProducts())
                 .thenReturn(Flowable.<List<Products.ProductsBean>>error(new IOException()));
 
         cartPresenter.getCartProducts();
@@ -84,7 +84,7 @@ public class CartPresenterTest {
     public void shouldRemoveProductFromCartSuccessfully() {
         cartPresenter.removeProductFromCart(CART_PRODUCTS_BEAN);
 
-        verify(shoppingRepository).updateProductStatus(CART_PRODUCTS_BEAN);
+        verify(localRepository).updateProductStatus(CART_PRODUCTS_BEAN);
         verify(view).showRemoveSucessMessage();
     }
 

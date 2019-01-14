@@ -1,6 +1,6 @@
 package com.shoppingapp.shopping.orderListing;
 
-import com.shoppingapp.data.ShoppingRepository;
+import com.shoppingapp.data.LocalRepository;
 
 import org.junit.After;
 import org.junit.Before;
@@ -27,7 +27,7 @@ public class OrderListingPresenterTest {
     public RxSchedulersOverrideRule schedulersOverrideRule = new RxSchedulersOverrideRule();
 
     @Mock
-    private ShoppingRepository shoppingRepository;
+    private LocalRepository localRepository;
 
     @Mock
     private OrderListingView view;
@@ -40,9 +40,9 @@ public class OrderListingPresenterTest {
 
     @Before
     public void setup() {
-        orderListingPresenter = new OrderListingPresenter(shoppingRepository);
+        orderListingPresenter = new OrderListingPresenter(localRepository);
         orderListingPresenter.attachView(view);
-        when(shoppingRepository.getAllOrder()).thenReturn(orderListFlowable);
+        when(localRepository.getAllOrder()).thenReturn(orderListFlowable);
     }
 
     @Test
@@ -57,7 +57,7 @@ public class OrderListingPresenterTest {
 
     @Test
     public void shouldShowErrorWhenDatabaseFetchingIsFailed() {
-        when(shoppingRepository.getAllOrder())
+        when(localRepository.getAllOrder())
                 .thenReturn(Flowable.<List<String>>error(new IOException()));
 
         orderListingPresenter.getAllOrders();
