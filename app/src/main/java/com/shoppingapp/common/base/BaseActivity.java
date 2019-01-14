@@ -1,13 +1,15 @@
 package com.shoppingapp.common.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
 import android.support.v7.app.AppCompatActivity;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
+import io.reactivex.annotations.Nullable;
+
 import com.shoppingapp.R;
 
 public abstract class BaseActivity<P extends Presenter<?>> extends AppCompatActivity {
