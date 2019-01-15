@@ -11,24 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c3c32df-2a7e-4bf5-a0e2-8eb38fcec09c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/RemoteRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/remote/ProductApiRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/remote/ProductApiRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/remote/RemoteApiRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/remote/RemoteApiRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/ProductPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/ProductPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/di/ProductActivityModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/di/ProductActivityModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/shoppingapp/data/remote/ProductApiRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/shoppingapp/data/remote/ProductApiRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/shoppingapp/shopping/products/ProductPresenterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/shoppingapp/shopping/products/ProductPresenterTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="7c3c32df-2a7e-4bf5-a0e2-8eb38fcec09c" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,11 +33,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ProductPresenter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ProductPresenter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/ProductPresenter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
+            <state relative-caret-position="195">
+              <caret line="31" column="64" selection-start-line="31" selection-start-column="64" selection-end-line="31" selection-end-column="64" />
+              <folding>
+                <element signature="e#1511#2079#0" expanded="true" />
+                <element signature="e#2078#2079#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LocalRepository.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/LocalRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -2263,14 +2259,15 @@
       <list>
         <option value="$PROJECT_DIR$/local.properties" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/ProductActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/LocalRepository.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/Local/DatabaseRepository.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/Local/ProductDAO.java" />
         <option value="$PROJECT_DIR$/app/src/test/java/com/shoppingapp/data/Local/DatabaseRepositoryTest.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/common/base/BaseActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/ProductPresenter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/remote/ProductApiRepository.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/remote/RemoteApiRepository.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/ProductPresenter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/ShoppingRepository.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/LocalRepository.java" />
       </list>
     </option>
   </component>
@@ -2668,8 +2665,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/shoppingapp/shopping/products/ProductPresenter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
+        <state relative-caret-position="195">
+          <caret line="31" column="64" selection-start-line="31" selection-start-column="64" selection-end-line="31" selection-end-column="64" />
+          <folding>
+            <element signature="e#1511#2079#0" expanded="true" />
+            <element signature="e#2078#2079#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/shoppingapp/data/LocalRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
         </state>
       </provider>
     </entry>
