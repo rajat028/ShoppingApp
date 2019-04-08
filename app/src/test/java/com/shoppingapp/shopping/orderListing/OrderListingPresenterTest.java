@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import io.reactivex.Flowable;
+import io.reactivex.Single;
 import utils.RxSchedulersOverrideRule;
 
 import static org.mockito.Mockito.verify;
@@ -33,8 +33,7 @@ public class OrderListingPresenterTest {
     private OrderListingView view;
 
     private List<String> orderList = Collections.singletonList("1234");
-    private Flowable<List<String>> orderListFlowable
-            = Flowable.just(orderList);
+    private Single<List<String>> orders = Single.just(orderList);
 
     private OrderListingPresenter orderListingPresenter;
 
@@ -42,7 +41,7 @@ public class OrderListingPresenterTest {
     public void setup() {
         orderListingPresenter = new OrderListingPresenter(localRepository);
         orderListingPresenter.attachView(view);
-        when(localRepository.getAllOrder()).thenReturn(orderListFlowable);
+        when(localRepository.getAllOrder()).thenReturn(orders);
     }
 
     @Test
@@ -58,7 +57,7 @@ public class OrderListingPresenterTest {
     @Test
     public void shouldShowErrorWhenDatabaseFetchingIsFailed() {
         when(localRepository.getAllOrder())
-                .thenReturn(Flowable.<List<String>>error(new IOException()));
+                .thenReturn(Single.error(new IOException()));
 
         orderListingPresenter.getAllOrders();
 

@@ -1,7 +1,7 @@
 package com.shoppingapp.shopping.products;
 
-import com.shoppingapp.data.RemoteRepository;
 import com.shoppingapp.data.LocalRepository;
+import com.shoppingapp.data.ProductsRepository;
 import com.shoppingapp.data.model.Products;
 
 import org.junit.After;
@@ -16,8 +16,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import io.reactivex.Flowable;
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import utils.RxSchedulersOverrideRule;
 
 import static org.mockito.Mockito.verify;
@@ -29,32 +28,31 @@ public class ProductPresenterTest {
     @Rule
     public RxSchedulersOverrideRule schedulersOverrideRule = new RxSchedulersOverrideRule();
 
-    private static Products.ProductsBean PRODUCTS_BEAN = new Products.ProductsBean("One Plus 6T",
+    private static Products.ProductsBean INTERNAL_PRODUCT = new Products.ProductsBean("One Plus 6T",
             "www.google.com",
             "2000",
             2.00,
             false);
-    private static List<Products.ProductsBean> PRODUCTS_BEAN_LIST = Collections.singletonList(PRODUCTS_BEAN);
-    private static Products PRODUCTS = new Products(PRODUCTS_BEAN_LIST);
+    private static List<Products.ProductsBean> INTERNAL_PRODUCTS = Collections.singletonList(INTERNAL_PRODUCT);
+    private static Products PRODUCTS = new Products(INTERNAL_PRODUCTS);
 
     @Mock
-    private RemoteRepository productRepository;
+    private ProductsRepository productRepository;
     @Mock
     private LocalRepository localRepository;
     @Mock
     private ProductView view;
 
-    private Flowable<List<Products.ProductsBean>> productListFlowable
-            = Flowable.just(PRODUCTS_BEAN_LIST);
-    private Observable<Products> productsObservable = Observable.just(PRODUCTS);
+    private Single<List<Products.ProductsBean>> internalProducts = Single.just(INTERNAL_PRODUCTS);
+    private Single<Products> products = Single.just(PRODUCTS);
     private ProductPresenter productPresenter;
 
     @Before
     public void setUp() {
         productPresenter = new ProductPresenter(productRepository, localRepository);
         productPresenter.attachView(view);
-        when(localRepository.getAllProducts()).thenReturn(productListFlowable);
-        when(productRepository.getProducts()).thenReturn(productsObservable);
+        when(localRepository.getAllProducts()).thenReturn(internalProducts);
+        when(productRepository.getProducts()).thenReturn(products);
     }
 
     @Test
@@ -70,7 +68,7 @@ public class ProductPresenterTest {
     @Test
     public void shouldShowErrorWhenDatabaseFetchingIsFailed() {
         when(localRepository.getAllProducts())
-                .thenReturn(Flowable.<List<Products.ProductsBean>>error(new IOException()));
+                .thenReturn(Single.error(new IOException()));
 
         productPresenter.getProducts();
 
@@ -91,7 +89,7 @@ public class ProductPresenterTest {
     @Test
     public void shouldShowErrorWhenApiFetchingIsFailed() {
         when(productRepository.getProducts())
-                .thenReturn(Observable.<Products>error(new IOException()));
+                .thenReturn(Single.error(new IOException()));
 
         productPresenter.fetchProductsFromAPI();
 
@@ -103,14 +101,14 @@ public class ProductPresenterTest {
     public void shouldInsertProductInDatabase() {
         productPresenter.insertToLocal(PRODUCTS.getProducts());
 
-        verify(localRepository).insertProduct(PRODUCTS_BEAN);
+        verify(localRepository).insertProduct(INTERNAL_PRODUCT);
     }
 
     @Test
     public void shouldAddProductToCart() {
-        productPresenter.addProductToCart(PRODUCTS_BEAN);
+        productPresenter.addProductToCart(INTERNAL_PRODUCT);
 
-        verify(localRepository).updateProductStatus(PRODUCTS_BEAN);
+        verify(localRepository).updateProductStatus(INTERNAL_PRODUCT);
         verify(view).showAddToCartSucess();
     }
 

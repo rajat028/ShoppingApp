@@ -14,20 +14,18 @@ import io.reactivex.CompletableObserver;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class CartPresenter extends BasePresenter<CartView> {
 
-    private LocalRepository localRepository;
+    @Inject
+    LocalRepository localRepository;
 
     @Inject
-    public CartPresenter(LocalRepository localRepository) {
-        this.localRepository = localRepository;
+    CartPresenter() {
+
     }
 
     void getCartProducts() {
@@ -38,22 +36,16 @@ public class CartPresenter extends BasePresenter<CartView> {
         compositeDisposable.add(localRepository.getCartProducts()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Consumer<List<Products.ProductsBean>>() {
-                    @Override
-                    public void accept(List<Products.ProductsBean> productsBeans) {
-                        if (view != null) {
-                            view.hideLoader();
-                            view.showProducts(productsBeans);
-                        }
+                .subscribe(productsBeans -> {
+                    if (view != null) {
+                        view.hideLoader();
+                        view.showProducts(productsBeans);
                     }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) {
-                        Timber.e(throwable);
-                        if (view != null) {
-                            view.hideLoader();
-                            view.showError();
-                        }
+                }, throwable -> {
+                    Timber.e(throwable);
+                    if (view != null) {
+                        view.hideLoader();
+                        view.showError();
                     }
                 }));
     }
@@ -65,13 +57,9 @@ public class CartPresenter extends BasePresenter<CartView> {
     }
 
     public void removeProductFromCart(final Products.ProductsBean productsBean) {
-        Completable.fromAction(new Action() {
-            @Override
-            public void run() {
-                localRepository.updateProductStatus(productsBean);
-            }
-        }).observeOn(AndroidSchedulers.mainThread())
+        Completable.fromAction(() -> localRepository.updateProductStatus(productsBean))
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {
 
                     @Override
@@ -98,12 +86,9 @@ public class CartPresenter extends BasePresenter<CartView> {
     public void placeOrder(final List<Products.ProductsBean> productsBeanList) {
         final String orderId = String.valueOf(System.currentTimeMillis());
         compositeDisposable.add(Observable.fromIterable(productsBeanList)
-                .map(new Function<Products.ProductsBean, OrderModel>() {
-                    @Override
-                    public OrderModel apply(Products.ProductsBean productsBean) {
-                        return OrderModel.create(orderId, productsBean);
-                    }
-                }).subscribeOn(Schedulers.io())
+                .map(productsBean -> OrderModel.create(orderId, productsBean))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<OrderModel>() {
                     @Override
                     public void onNext(OrderModel orderBean) {
@@ -130,13 +115,9 @@ public class CartPresenter extends BasePresenter<CartView> {
     }
 
     private void removeAllProductFromCart(final Products.ProductsBean productsBean) {
-        Completable.fromAction(new Action() {
-            @Override
-            public void run() {
-                localRepository.updateAllProducts(false, productsBean.getName());
-            }
-        }).observeOn(AndroidSchedulers.mainThread())
+        Completable.fromAction(() -> localRepository.updateAllProducts(false, productsBean.getName()))
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {
                     @Override
                     public void onSubscribe(Disposable disposable) {

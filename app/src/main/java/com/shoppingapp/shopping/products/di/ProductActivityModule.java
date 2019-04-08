@@ -1,6 +1,6 @@
 package com.shoppingapp.shopping.products.di;
 
-import com.shoppingapp.data.RemoteRepository;
+import com.shoppingapp.data.ProductsRepository;
 import com.shoppingapp.data.remote.ProductApiRepository;
 import com.shoppingapp.data.remote.ShoppingApi;
 import com.shoppingapp.shopping.products.adapter.ProductsAdapter;
@@ -19,8 +19,7 @@ public class ProductActivityModule {
 
     @Provides
     @ProductScope
-    public RemoteRepository getProductRepository(ShoppingApi shoppingApi) {
+    public ProductsRepository getProductRepository(ShoppingApi shoppingApi) {
         return new ProductApiRepository(shoppingApi);
     }
-
 }

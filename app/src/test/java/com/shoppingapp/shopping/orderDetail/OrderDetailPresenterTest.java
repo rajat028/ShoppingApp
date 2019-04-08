@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import io.reactivex.Flowable;
+import io.reactivex.Single;
 import utils.RxSchedulersOverrideRule;
 
 import static org.mockito.Mockito.verify;
@@ -32,7 +32,7 @@ public class OrderDetailPresenterTest {
             "www.google.com",
             "2000",
             2.00);
-    private static List<OrderModel> ORDERED_PRODUCT_LIST = Collections.singletonList(ORDER_PRODUCTS);
+    private static List<OrderModel> ORDERED_PRODUCTS = Collections.singletonList(ORDER_PRODUCTS);
     private static String ORDER_ID = "1234";
 
     @Mock
@@ -41,7 +41,7 @@ public class OrderDetailPresenterTest {
     @Mock
     private OrderDetailView view;
 
-    private Flowable<List<OrderModel>> orderListFlowable = Flowable.just(ORDERED_PRODUCT_LIST);
+    private Single<List<OrderModel>> orderedProducts = Single.just(ORDERED_PRODUCTS);
     private OrderDetailPresenter orderDetailPresenter;
 
     @Before
@@ -49,7 +49,7 @@ public class OrderDetailPresenterTest {
         orderDetailPresenter = new OrderDetailPresenter(localRepository);
         orderDetailPresenter.attachView(view);
 
-        when(localRepository.getProductByOrderId(ORDER_ID)).thenReturn(orderListFlowable);
+        when(localRepository.getProductByOrderId(ORDER_ID)).thenReturn(orderedProducts);
     }
 
     @Test
@@ -59,13 +59,13 @@ public class OrderDetailPresenterTest {
         verify(view).hideError();
         verify(view).showLoader();
         verify(view).hideLoader();
-        verify(view).showProducts(ORDERED_PRODUCT_LIST);
+        verify(view).showProducts(ORDERED_PRODUCTS);
     }
 
     @Test
     public void shouldReturnProductsAsPerOrderIdWhenFailed() {
         when(localRepository.getProductByOrderId(ORDER_ID))
-                .thenReturn(Flowable.<List<OrderModel>>error(new IOException()));
+                .thenReturn(Single.error(new IOException()));
 
         orderDetailPresenter.getOrderedProductById(ORDER_ID);
 

@@ -10,11 +10,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Collections;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.observers.TestObserver;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -25,27 +23,26 @@ public class ProductApiRepositoryTest {
 
     private ProductApiRepository productApiRepository;
 
-    private Products.ProductsBean productsBean = new Products.ProductsBean("One Plus 6T",
+    private Products.ProductsBean PRODUCT = new Products.ProductsBean("One Plus 6T",
             "www.google.com",
             "2000",
             2.00,
             false);
-    private Products products = new Products(Collections.singletonList(productsBean));
-    private Observable<Products> productsObservable = Observable.just(products);
+    private Products PRODUCTS = new Products(Collections.singletonList(PRODUCT));
+    private Single<Products> products = Single.just(PRODUCTS);
 
 
     @Before
     public void setUp() {
         productApiRepository = new ProductApiRepository(shoppingApi);
 
-        when(shoppingApi.getProducts()).thenReturn(productsObservable);
+        when(shoppingApi.getProducts()).thenReturn(products);
     }
 
     @Test
     public void shouldReturnGetProductsIsCalled() {
-        Observable<Products> observable = productApiRepository.getProducts();
+        TestObserver<Products> testObserver = productApiRepository.getProducts().test();
 
-        verify(shoppingApi).getProducts();
-        assertEquals(observable, productsObservable);
+        testObserver.assertValue(PRODUCTS);
     }
 }

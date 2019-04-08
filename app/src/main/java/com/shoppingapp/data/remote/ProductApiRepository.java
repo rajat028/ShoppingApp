@@ -1,13 +1,13 @@
 package com.shoppingapp.data.remote;
 
-import com.shoppingapp.data.RemoteRepository;
+import com.shoppingapp.data.ProductsRepository;
 import com.shoppingapp.data.model.Products;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public class
 
-ProductApiRepository implements RemoteRepository {
+ProductApiRepository implements ProductsRepository {
 
     private ShoppingApi shoppingApi;
 
@@ -16,7 +16,7 @@ ProductApiRepository implements RemoteRepository {
     }
 
     @Override
-    public Observable<Products> getProducts() {
+    public Single<Products> getProducts() {
         return shoppingApi.getProducts();
     }
 }

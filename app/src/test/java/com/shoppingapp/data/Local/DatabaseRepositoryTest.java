@@ -13,112 +13,105 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import io.reactivex.Flowable;
+import io.reactivex.Single;
+import io.reactivex.observers.TestObserver;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DatabaseRepositoryTest {
 
+    private static String ORDER_ID = "1234";
     private static Products.ProductsBean PRODUCTS_BEAN = new Products.ProductsBean("One Plus 6T",
             "www.google.com",
             "2000",
             2.00,
             false);
-    private static Products.ProductsBean CART_PRODUCTS_BEAN = new Products.ProductsBean("Samsung Galaxy",
+    private static Products.ProductsBean CART_PRODUCT = new Products.ProductsBean("Samsung Galaxy",
             "www.google.com",
             "5000",
             8.00,
             true);
-    private static String ORDER_ID = "1234";
-    private static OrderModel ORDERED_PRODUCTS = OrderModel.create(ORDER_ID, CART_PRODUCTS_BEAN);
-    private static List<Products.ProductsBean> PRODUCTS_BEAN_LIST =
-            Collections.singletonList(PRODUCTS_BEAN);
-    private static List<Products.ProductsBean> CART_PRODUCTS_BEAN_LIST =
-            Arrays.asList(CART_PRODUCTS_BEAN, CART_PRODUCTS_BEAN);
+    private static List<String> ORDERS = Collections.singletonList(ORDER_ID);
+    private static OrderModel ORDERED_PRODUCT = OrderModel.create(ORDER_ID, CART_PRODUCT);
+    private static List<Products.ProductsBean> PRODUCTS = Collections.singletonList(PRODUCTS_BEAN);
+    private static List<Products.ProductsBean> CART_PRODUCTS = Arrays.asList(CART_PRODUCT, CART_PRODUCT);
+    private static List<OrderModel> ORDERED_PRODUCTS = Arrays.asList(ORDERED_PRODUCT, ORDERED_PRODUCT);
 
     @Mock
     private ProductDAO productDAO;
 
     private DatabaseRepository databaseRepository;
-    private Flowable<List<Products.ProductsBean>> productListFlowable
-            = Flowable.just(PRODUCTS_BEAN_LIST);
-    private Flowable<List<Products.ProductsBean>> cartListFlowable
-            = Flowable.just(CART_PRODUCTS_BEAN_LIST);
-    private Flowable<List<String>> orderListFlowable
-            = Flowable.just(Collections.singletonList(ORDER_ID));
-    private Flowable<List<OrderModel>> orderedProductListFlowable
-            = Flowable.just(Collections.singletonList(ORDERED_PRODUCTS));
+    private Single<List<Products.ProductsBean>> products = Single.just(PRODUCTS);
+    private Single<List<Products.ProductsBean>> cartProducts
+            = Single.just(CART_PRODUCTS);
+    private Single<List<String>> orders
+            = Single.just(ORDERS);
+    private Single<List<OrderModel>> orderedProducts = Single.just(ORDERED_PRODUCTS);
 
     @Before
     public void setUp() {
         databaseRepository = new DatabaseRepository(productDAO);
-        when(productDAO.getAllProducts()).thenReturn(productListFlowable);
-        when(productDAO.getCartProducts()).thenReturn(cartListFlowable);
-        when(productDAO.getAllOrder()).thenReturn(orderListFlowable);
-        when(productDAO.getProductByOrderId(ORDER_ID)).thenReturn(orderedProductListFlowable);
+        when(productDAO.getAllProducts()).thenReturn(products);
+        when(productDAO.getCartProducts()).thenReturn(cartProducts);
+        when(productDAO.getAllOrder()).thenReturn(orders);
+        when(productDAO.getProductByOrderId(ORDER_ID)).thenReturn(orderedProducts);
     }
 
     @Test
     public void shouldReturnAllProductsList() {
-        Flowable<List<Products.ProductsBean>> allProducts = databaseRepository.getAllProducts();
+        TestObserver<List<Products.ProductsBean>> testObserver = databaseRepository.getAllProducts().test();
 
-        verify(productDAO).getAllProducts();
-        assertEquals(allProducts, productListFlowable);
+        testObserver.assertValue(PRODUCTS);
     }
 
     @Test
     public void shouldReturnAllCartProductsList() {
-        Flowable<List<Products.ProductsBean>> allCartProducts = databaseRepository.getCartProducts();
+        TestObserver<List<Products.ProductsBean>> testObserver = databaseRepository.getCartProducts().test();
 
-        verify(productDAO).getCartProducts();
-        assertEquals(allCartProducts, cartListFlowable);
+        testObserver.assertValue(CART_PRODUCTS);
     }
 
     @Test
     public void shouldReturnAllOrdersList() {
-        Flowable<List<String>> allOrdersFlowable = databaseRepository.getAllOrder();
+        TestObserver<List<String>> testObserver = databaseRepository.getAllOrder().test();
 
-        verify(productDAO).getAllOrder();
-        assertEquals(allOrdersFlowable, orderListFlowable);
+        testObserver.assertValue(ORDERS);
     }
 
     @Test
     public void shouldReturnOrderedProductListFromOrderId() {
-        Flowable<List<OrderModel>> productsListByOrderId = databaseRepository.getProductByOrderId(ORDER_ID);
+        TestObserver<List<OrderModel>> testObserver = databaseRepository.getProductByOrderId(ORDER_ID).test();
 
-        verify(productDAO).getProductByOrderId(ORDER_ID);
-        assertEquals(productsListByOrderId, orderedProductListFlowable);
+        testObserver.assertValue(ORDERED_PRODUCTS);
     }
 
     @Test
     public void shouldCallProductDaoInsertProduct() {
-        databaseRepository.insertProduct(PRODUCTS_BEAN);
+        TestObserver<Void> testObserver = databaseRepository.insertProduct(PRODUCTS_BEAN).test();
 
-        verify(productDAO).insertProduct(PRODUCTS_BEAN);
+        testObserver.assertComplete();
     }
 
     @Test
     public void shouldCallProductDaoUpdateProductStatus() {
-        databaseRepository.updateProductStatus(PRODUCTS_BEAN);
+        TestObserver<Void> testObserver = databaseRepository.updateProductStatus(PRODUCTS_BEAN).test();
 
-        verify(productDAO).updateProductStatus(PRODUCTS_BEAN);
+        testObserver.assertComplete();
     }
 
     @Test
     public void shouldCallProductDaoUpdateAllProducts() {
-        databaseRepository.updateAllProducts(false, "One Plus 6T");
+        TestObserver<Void> testObserver = databaseRepository.updateAllProducts(false, "One Plus 6T").test();
 
-        verify(productDAO).updateAllProducts(false, "One Plus 6T");
+        testObserver.assertComplete();
     }
 
     @Test
     public void shouldCallProductDaoInsertOrder() {
-        databaseRepository.insertOrder(ORDERED_PRODUCTS);
+        TestObserver<Void> testObserver = databaseRepository.insertOrder(ORDERED_PRODUCT).test();
 
-        verify(productDAO).insertOrder(ORDERED_PRODUCTS);
+        testObserver.assertComplete();
     }
 
 }

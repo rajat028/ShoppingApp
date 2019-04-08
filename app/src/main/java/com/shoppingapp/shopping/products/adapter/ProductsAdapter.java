@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.shoppingapp.R;
 import com.shoppingapp.data.model.Products;
 import com.shoppingapp.shopping.products.ProductActivity;
 
@@ -18,7 +19,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.shoppingapp.R;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductHolder> {
 
@@ -81,15 +81,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             else
                 ivAddToCart.setImageResource(R.mipmap.ic_action_bookmark_border);
 
-            ivAddToCart.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    productsBean.setAddedToCart(true);
-                    ((ProductActivity) context).addToCart(productsBean);
-                }
+            itemView.setOnClickListener(view -> {
+                productsBean.setAddedToCart(true);
+                ((ProductActivity) context).addToCart(productsBean);
             });
-
         }
     }
-
 }

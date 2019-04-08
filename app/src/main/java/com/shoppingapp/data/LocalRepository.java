@@ -5,7 +5,9 @@ import com.shoppingapp.data.model.Products;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 public interface LocalRepository {
 
@@ -13,15 +15,15 @@ public interface LocalRepository {
 
     Flowable<List<Products.ProductsBean>> getCartProducts();
 
-    Flowable<List<String>> getAllOrder();
+    Single<List<String>> getAllOrder();
 
-    Flowable<List<OrderModel>> getProductByOrderId(String orderId);
+    Single<List<OrderModel>> getProductByOrderId(String orderId);
 
-    void insertProduct(Products.ProductsBean productsBean);
+    Completable insertProduct(Products.ProductsBean productsBean);
 
-    void updateProductStatus(Products.ProductsBean productsBean);
+    Completable updateProductStatus(Products.ProductsBean productsBean);
 
-    void updateAllProducts(boolean status, String name);
+    Completable updateAllProducts(boolean status, String name);
 
-    void insertOrder(OrderModel oderBean);
+    Completable insertOrder(OrderModel oderBean);
 }

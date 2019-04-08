@@ -15,7 +15,4 @@ public class ApiModule {
     public ShoppingApi shoppingApi(Retrofit retrofit) {
         return retrofit.create(ShoppingApi.class);
     }
-
-
-
 }

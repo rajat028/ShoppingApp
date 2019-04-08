@@ -11,6 +11,7 @@ import com.shoppingapp.data.model.Products;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 @Dao
 public interface ProductDAO {
@@ -22,10 +23,10 @@ public interface ProductDAO {
     Flowable<List<Products.ProductsBean>> getCartProducts();
 
     @Query("SELECT order_id FROM `order`")
-    Flowable<List<String>> getAllOrder();
+    Single<List<String>> getAllOrder();
 
     @Query("SELECT * FROM `order` WHERE order_id=:orderId")
-    Flowable<List<OrderModel>> getProductByOrderId(String orderId);
+    Single<List<OrderModel>> getProductByOrderId(String orderId);
 
     @Insert
     void insertProduct(Products.ProductsBean productsBean);

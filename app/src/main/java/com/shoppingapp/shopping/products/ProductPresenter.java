@@ -2,20 +2,16 @@ package com.shoppingapp.shopping.products;
 
 import com.shoppingapp.common.base.BasePresenter;
 import com.shoppingapp.data.LocalRepository;
-import com.shoppingapp.data.RemoteRepository;
+import com.shoppingapp.data.ProductsRepository;
 import com.shoppingapp.data.model.Products;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Completable;
-import io.reactivex.CompletableObserver;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
+import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -23,14 +19,14 @@ import timber.log.Timber;
 public class ProductPresenter extends BasePresenter<ProductView> {
 
     // Repository to handle api operations.
-    private RemoteRepository productRepository;
+    private ProductsRepository productRepository;
 
     // Repository to handle database operations.
     private LocalRepository localRepository;
 
     @Inject
-    public ProductPresenter(RemoteRepository productRepository, LocalRepository localRepository) {
-        this.productRepository = productRepository;
+    public ProductPresenter(ProductsRepository productsRepository, LocalRepository localRepository) {
+        this.productRepository = productsRepository;
         this.localRepository = localRepository;
     }
 
@@ -42,26 +38,20 @@ public class ProductPresenter extends BasePresenter<ProductView> {
         compositeDisposable.add(localRepository.getAllProducts()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Consumer<List<Products.ProductsBean>>() {
-                    @Override
-                    public void accept(List<Products.ProductsBean> productsBeans) {
-                        if (view != null) {
-                            if (productsBeans.isEmpty()) {
-                                fetchProductsFromAPI();
-                            } else {
-                                view.hideLoader();
-                                view.showProducts(productsBeans);
-                            }
+                .subscribe(productsBeans -> {
+                    if (view != null) {
+                        if (productsBeans.isEmpty()) {
+                            fetchProductsFromAPI();
+                        } else {
+                            view.hideLoader();
+                            view.showProducts(productsBeans);
                         }
                     }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) {
-                        Timber.e(throwable);
-                        if (view != null) {
-                            view.hideLoader();
-                            view.showError();
-                        }
+                }, throwable -> {
+                    Timber.e(throwable);
+                    if (view != null) {
+                        view.hideLoader();
+                        view.showError();
                     }
                 }));
     }
@@ -70,28 +60,17 @@ public class ProductPresenter extends BasePresenter<ProductView> {
         compositeDisposable.add(productRepository.getProducts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<Products>() {
-                    @Override
-                    public void onNext(Products value) {
-                        if (view != null) {
-                            insertToLocal(value.getProducts());
-                            view.hideLoader();
-                            view.showProducts(value.getProducts());
-                        }
+                .subscribe(products -> {
+                    if (view != null) {
+                        insertToLocal(products.getProducts());
+                        view.hideLoader();
+                        view.showProducts(products.getProducts());
                     }
-
-                    @Override
-                    public void onError(Throwable throwable) {
-                        Timber.e(throwable);
-                        if (view != null) {
-                            view.hideLoader();
-                            view.showError();
-                        }
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        /// no op
+                }, throwable -> {
+                    Timber.e(throwable);
+                    if (view != null) {
+                        view.hideLoader();
+                        view.showError();
                     }
                 }));
     }
@@ -122,31 +101,44 @@ public class ProductPresenter extends BasePresenter<ProductView> {
     }
 
     void addProductToCart(final Products.ProductsBean productsBean) {
-        Completable.fromAction(new Action() {
-            @Override
-            public void run() {
-                localRepository.updateProductStatus(productsBean);
-            }
-        }).observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new CompletableObserver() {
-                    @Override
-                    public void onSubscribe(Disposable disposable) {
-                        compositeDisposable.add(disposable);
-                    }
 
+        localRepository.updateProductStatus(productsBean)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableCompletableObserver() {
                     @Override
                     public void onComplete() {
-                        if (view != null)
-                            view.showAddToCartSucess();
+                        Timber.d("XXXX Update complete");
                     }
 
                     @Override
-                    public void onError(Throwable throwable) {
-                        if (view != null)
-                            view.showAddToCartError(throwable.getLocalizedMessage());
+                    public void onError(Throwable e) {
+                        Timber.d("XXXX Update error");
                     }
                 });
+
+//        Completable.fromAction(() ->
+//                localRepository.updateProductStatus(productsBean))
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new CompletableObserver() {
+//                    @Override
+//                    public void onSubscribe(Disposable disposable) {
+//                        compositeDisposable.add(disposable);
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        if (view != null)
+//                            view.showAddToCartSucess();
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable throwable) {
+//                        if (view != null)
+//                            view.showAddToCartError(throwable.getLocalizedMessage());
+//                    }
+//                });
     }
 
     void retry() {

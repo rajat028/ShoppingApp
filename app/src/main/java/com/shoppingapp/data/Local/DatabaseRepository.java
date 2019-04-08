@@ -6,7 +6,9 @@ import com.shoppingapp.data.model.Products;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 public class DatabaseRepository implements LocalRepository {
 
@@ -27,32 +29,39 @@ public class DatabaseRepository implements LocalRepository {
     }
 
     @Override
-    public Flowable<List<String>> getAllOrder() {
+    public Single<List<String>> getAllOrder() {
         return productDAO.getAllOrder();
     }
 
     @Override
-    public Flowable<List<OrderModel>> getProductByOrderId(String orderId) {
+    public Single<List<OrderModel>> getProductByOrderId(String orderId) {
         return productDAO.getProductByOrderId(orderId);
     }
 
     @Override
-    public void insertProduct(Products.ProductsBean productsBean) {
-        productDAO.insertProduct(productsBean);
+    public Completable insertProduct(Products.ProductsBean productsBean) {
+        return Completable.fromAction(() ->
+                productDAO.insertProduct(productsBean));
     }
 
     @Override
-    public void updateProductStatus(Products.ProductsBean productsBean) {
-        productDAO.updateProductStatus(productsBean);
+    public Completable updateProductStatus(Products.ProductsBean productsBean) {
+        return Completable.fromAction(() -> productDAO.updateProductStatus(productsBean));
+    }
+
+    private void runProcess() {
+
     }
 
     @Override
-    public void updateAllProducts(boolean status, String name) {
-        productDAO.updateAllProducts(status, name);
+    public Completable updateAllProducts(boolean status, String name) {
+        return Completable.fromAction(() ->
+                productDAO.updateAllProducts(status, name));
     }
 
     @Override
-    public void insertOrder(OrderModel oderBean) {
-        productDAO.insertOrder(oderBean);
+    public Completable insertOrder(OrderModel oderBean) {
+        return Completable.fromAction(() ->
+                productDAO.insertOrder(oderBean));
     }
 }
